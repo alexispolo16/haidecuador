@@ -145,17 +145,17 @@ const sourcingTabs = [
         principios de sostenibilidad y contribuyan activamente al logro de los
         ODS. Esta adaptabilidad nos permite no solo cumplir con los estándares
         éticos y ambientales más altos, sino también promover un impacto
-        positivo en las comunidades y el medio ambiente en los que operamos.
+        positivo en las comunidades y el medio ambiente en los&nbsp;que&nbsp;operamos.
       </p>
     ),
   },
   {
-    label: "Esquemas de certificacion aceptados",
+    label: "Esquemas de certificacion\u00a0aceptados",
     content: (
       <>
         <p>
           HAID (Ecuador) FEED CIA. LTDA. se compromete a cumplir con el
-          abastecimiento y compra responsable de ingredientes. Realizaremos
+          abastecimiento y compra responsable de ingredientes.&nbsp; Realizaremos
           revisiones periódicas de esta política para asegurarnos de que se
           mantenga actualizada y sea efectiva en el logro de nuestros objetivos
           de sostenibilidad.
@@ -386,7 +386,7 @@ export default function SostenibilidadPage() {
                 Con este compromiso, Haid (Ecuador) Feed Cia Ltda., se
                 compromete a asegurar el abastecimiento de ingredientes
                 vegetales libres de deforestación/conversión desde el 1 de mayo
-                2024 terminando su implementación en mayo 2025.
+                2024 terminando su implementación&nbsp;en&nbsp;mayo&nbsp;2025.
               </p>
             </div>
           </div>

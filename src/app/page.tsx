@@ -92,12 +92,12 @@ export default function Home() {
         <div className="e-container">
           <Reveal
             animation="fadeInUp"
-            className="relative z-[3] mt-[-9%] flex gap-[10px] p-[10px] max-lg:flex-wrap max-md:flex-col"
+            className="relative z-[3] mt-[-9%] flex gap-[10px] p-[10px] max-md:flex-col"
           >
             {pillars.map((p, i) => (
               <div
                 key={p.title}
-                className="flex min-h-[398px] flex-1 flex-col justify-start rounded-[5px] border-b-[5px] border-[#097635] bg-white p-[2%] shadow-[0_0_2px_0_#9A9A9A] max-lg:basis-[calc(50%-5px)] max-md:basis-auto"
+                className="flex min-h-[398px] flex-1 flex-col justify-start rounded-[5px] border-b-[5px] border-[#097635] bg-white p-[2%] shadow-[0_0_2px_0_#9A9A9A]"
               >
                 <div className="text-center">
                   <div className="mx-auto mb-4">
@@ -106,7 +106,8 @@ export default function Home() {
                       dangerouslySetInnerHTML={{ __html: boxIcons[i] }}
                     />
                   </div>
-                  <h3 className="mt-2 mb-4 normal-case max-lg:mb-10 max-md:mb-[15px]">{p.title}</h3>
+                  {/* Solo la primera tarjeta tiene margen propio en tablet/móvil en el original. */}
+                  <h3 className={`mt-2 mb-4 normal-case ${i === 0 ? "max-lg:mb-10 max-md:mb-[15px]" : ""}`}>{p.title}</h3>
                   <p className="m-0">{p.text}</p>
                 </div>
               </div>
