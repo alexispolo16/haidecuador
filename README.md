@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Haid Ecuador — Next.js
 
-## Getting Started
-
-First, run the development server:
+Migración de https://www.haid.com.ec (WordPress + Elementor) a Next.js 16 (App Router, TypeScript, Tailwind CSS 4).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Rutas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Se mantienen las URLs del sitio original:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Ruta | Página |
+| --- | --- |
+| `/` | Inicio |
+| `/productos` | Catálogo con pestañas por línea |
+| `/starter-pro`, `/starter`, `/speed`, `/happiness-plus`, `/happiness`, `/fitness` | Fichas de producto (`src/app/[producto]`) |
+| `/sostenibilidad`, `/estos-es-haid`, `/asc`, `/responsabilidad-ambiental`, `/contactanos` | Páginas institucionales |
 
-## Learn More
+## Contenido
 
-To learn more about Next.js, take a look at the following resources:
+- Todo el contenido (textos, tabs, acordeones, sliders, imágenes, PDFs) está copiado literalmente del sitio original, incluida su ortografía; no hay textos de relleno.
+- `src/content/site.ts`: menú, datos de contacto, documentos legales y fichas de producto. El resto del contenido vive en cada `page.tsx`.
+- El diseño replica el kit de Elementor del original (`src/app/globals.css`): tipografías h1–h6, colores, contenedor de 1230px y puntos de quiebre de Elementor (tablet ≤1024px, móvil ≤767px).
+- Si cambias `src/app/globals.css`, reinicia `npm run dev`: el cargador de Tailwind configurado en `next.config.ts` no siempre recarga ese archivo en caliente.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Imágenes y PDFs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Están alojados en `public/media` (76 archivos, ~30 MB) y se resuelven con `src/lib/media.ts`. Si agregas nuevas referencias a archivos del WordPress original, vuelve a ejecutar:
 
-## Deploy on Vercel
+```bash
+npm run import:media
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Formularios
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`/contactanos` y `/responsabilidad-ambiental` envían a la server action `src/app/actions.ts`, que valida y registra los datos. Falta conectar el envío de correo (Resend, SMTP, etc.) en el `TODO` de ese archivo.
+
+## Traducción y cookies
+
+- **Traducción simultánea** (`src/components/LanguageSwitcher.tsx`): banderas EN / ES en el menú, con Google Translate como en el sitio original. El idioma elegido se guarda en la cookie `googtrans` y se mantiene al navegar.
+- **Consentimiento de cookies** (`src/components/CookieConsent.tsx`): banner con el mismo funcionamiento que Cookiebot (Consentimiento / Detalles / Acerca de, cuatro categorías y botón flotante para cambiar la decisión). La decisión se guarda en la cookie `CookieConsent`. Antes de añadir analítica o píxeles de marketing, cárgalos solo si `hasConsent("statistics")` / `hasConsent("marketing")` (`src/lib/consent.ts`) y declara sus cookies en la pestaña Detalles.

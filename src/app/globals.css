@@ -1,26 +1,199 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Sistema visual replicado del kit Elementor del sitio original (post-8.css):
+ * colores y tipografías globales, contenedor de 1230px y puntos de quiebre
+ * de Elementor (tablet ≤1024px, móvil ≤767px).
+ */
+@theme {
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1025px;
+
+  --color-ink: #151515; /* primary */
+  --color-navy: #103b70; /* secondary */
+  --color-navy-deep: #033883;
+  --color-muted: #7a7a7a; /* text */
+  --color-amber: #feb703; /* accent */
+  --color-line: #e7e7e7;
+  --color-mist: #f0f2f7;
+  --color-night: #040e1a;
+  --color-green: #0c8c3c;
+  --color-green-btn: #09893c;
+  --color-footer: #293446;
+
+  --font-display: var(--font-maven), "Maven Pro", sans-serif;
+  --font-sans: var(--font-lato), "Lato", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-base leading-[1.8] text-muted antialiased max-md:text-[0.9rem];
+  }
+  /* Encabezados globales del kit (h1 blanco, h6 en acento). */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply m-0 font-display leading-none font-semibold text-ink capitalize;
+  }
+  h1 {
+    @apply text-[4.625rem] font-bold text-white max-lg:text-[4.25rem] max-md:text-[3.1rem];
+  }
+  h2 {
+    @apply text-[3.125rem] max-lg:text-[2.938rem] max-md:text-[2.3rem];
+  }
+  h3 {
+    @apply text-[1.625rem] max-lg:text-[1.6rem] max-md:text-[1.4rem];
+  }
+  h4 {
+    @apply text-[1.438rem] max-lg:text-[1.4rem] max-md:text-[1.2rem];
+  }
+  h5 {
+    @apply text-[1.25rem] max-lg:text-[1.2rem] max-md:text-[1rem];
+  }
+  h6 {
+    @apply text-[1.125rem] tracking-[0.6px] text-amber max-lg:text-[1.1rem] max-md:text-[1rem];
+  }
+  /* Como en el tema del sitio original, el último párrafo también conserva su margen inferior. */
+  p {
+    @apply mt-0 mb-[0.9rem];
+  }
+  a {
+    @apply transition-colors;
   }
 }
 
+@layer components {
+  /* Sección "boxed" de Elementor. */
+  .e-container {
+    @apply mx-auto w-full max-w-[1230px] max-lg:max-w-[1024px] max-md:max-w-[767px];
+  }
+  /* Separación por defecto entre widgets (20px). */
+  .e-stack > * + * {
+    @apply mt-5;
+  }
+  /* Botón global del kit. */
+  .e-btn {
+    @apply inline-block rounded bg-navy px-[30px] py-[15px] font-display text-[0.938rem] leading-none font-medium tracking-[0.5px] text-white uppercase transition-colors hover:bg-amber max-lg:text-[0.9rem] max-md:text-[0.8rem];
+  }
+  /* Tarjeta de "icon box" con sombra (Esto es Haid, Inicio…). */
+  .e-card {
+    @apply rounded bg-white p-[1em] shadow-[0_0_10px_0_rgba(0,0,0,0.2)];
+  }
+}
+
+/* Animaciones de entrada de Elementor (animate.css, 1.25s). */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Solo se oculta si hay JavaScript; sin JS (o al imprimir) el contenido se ve siempre. */
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+  }
+  .reveal.is-visible {
+    animation: var(--reveal, fade-up) 1.25s both;
+  }
+}
+@media print {
+  .reveal {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+  }
+  .reveal.is-visible {
+    animation: none;
+  }
+}
+/* Las animaciones laterales no deben crear scroll horizontal. */
+main {
+  overflow-x: clip;
+}
+
+/* Google Translate: se oculta la barra superior, el tooltip y el resaltado, como en el sitio original. */
+.goog-te-banner-frame,
+iframe.skiptranslate,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip {
+  display: none !important;
+}
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  top: 0 !important;
+}
+.goog-text-highlight,
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+font font {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  position: initial !important;
 }
