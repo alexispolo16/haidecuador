@@ -160,7 +160,7 @@ function Dialog({
       className="fixed inset-x-2 bottom-2 z-[60] flex max-h-[calc(100dvh-16px)] flex-col overflow-hidden rounded-lg bg-white font-[Helvetica,Arial,sans-serif] text-[15px] leading-[1.6] text-[#141414] shadow-[0_30px_70px_rgba(0,0,0,0.3)] outline-none md:inset-x-auto md:bottom-auto md:left-1/2 md:top-1/2 md:max-h-[calc(100vh-80px)] md:w-[900px] md:max-w-[calc(100vw-32px)] md:-translate-x-1/2 md:-translate-y-1/2"
     >
       <div className="flex h-14 shrink-0 items-center border-b md:h-[76px] border-[#d6d6d6] px-6">
-        <Image src={media("2024/05/1.海大logo无去掉背景.png")} alt="Haid" width={1791} height={689} sizes="94px" className="h-9 w-auto" />
+        <Image src={media("2024/05/logo-haid-horizontal.png")} alt="Haid" width={1791} height={689} sizes="94px" className="h-9 w-auto" />
       </div>
 
       <div role="tablist" className="flex shrink-0 border-b border-[#d6d6d6]">

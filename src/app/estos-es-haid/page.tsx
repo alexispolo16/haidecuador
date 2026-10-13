@@ -95,7 +95,7 @@ const photo = "block w-full rounded-[18px] object-cover shadow-[0_24px_50px_-30p
 export default function EstoEsHaidPage() {
   return (
     <>
-      <PageHero title="Haid Ecuador" image="2024/06/工厂2023-5-1-scaled.jpg" overlay={0.75} position="50% 41%" />
+      <PageHero title="Haid Ecuador" image="2024/06/fabrica-2023-5-1-scaled.jpg" overlay={0.75} position="50% 41%" />
 
       {/* Cultura empresarial: foto + texto, y los dos valores como fichas pequeñas */}
       <section className="px-5 py-8 lg:px-8 lg:py-12">

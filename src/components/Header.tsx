@@ -33,7 +33,7 @@ export function Header() {
       <div className="h-[3px] bg-gradient-to-r from-navy via-blue to-green-btn" />
       <div className="relative mx-auto flex h-[72px] max-w-[1360px] items-center gap-8 px-5 lg:px-8">
         <Link href="/" aria-label="Haid Ecuador, inicio" className="block w-[112px] shrink-0 max-md:w-[92px]">
-          <Image src={media("2024/05/1.海大logo无去掉背景.png")} alt="" width={1791} height={689} loading="eager" fetchPriority="low" sizes="112px" className="block h-auto w-full !rounded-none" />
+          <Image src={media("2024/05/logo-haid-horizontal.png")} alt="" width={1791} height={689} loading="eager" fetchPriority="low" sizes="112px" className="block h-auto w-full !rounded-none" />
         </Link>
 
         <nav aria-label="Principal" className="hidden flex-1 lg:block">

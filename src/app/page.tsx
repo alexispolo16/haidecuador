@@ -64,7 +64,7 @@ export default function Home() {
       {/* Superficie: la fotografía se muestra entera a la derecha y se funde con el azul donde vive el titular */}
       <section className="relative overflow-clip bg-deep pb-28 lg:pb-32">
         <div className="relative max-lg:h-[260px] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[68%]">
-          <HeroSlideshow images={["2024/06/工厂2023-5-scaled.jpg", "2024/06/Header.png"]} />
+          <HeroSlideshow images={["2024/06/fabrica-2023-5-scaled.jpg", "2024/06/Header.png"]} />
           <div className="absolute inset-0 z-[1] bg-gradient-to-t from-deep via-deep/10 to-transparent lg:bg-gradient-to-r lg:from-deep lg:via-deep/35 lg:to-transparent lg:to-60%" />
           <div className="absolute inset-x-0 bottom-0 z-[1] h-24 bg-gradient-to-t from-deep to-transparent max-lg:hidden" />
         </div>
@@ -119,7 +119,7 @@ export default function Home() {
             <div className="relative">
               <Shrimp gap="#f6faf9" className="pointer-events-none absolute -bottom-[20%] -left-[12%] w-[78%] text-navy opacity-[0.09]" />
               <Image
-                src={media("2024/06/工厂2023-6-scaled.jpg")}
+                src={media("2024/06/fabrica-2023-6-scaled.jpg")}
                 alt=""
                 width={2560}
                 height={1440}
