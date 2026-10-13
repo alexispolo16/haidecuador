@@ -8,6 +8,8 @@ export type FormField = {
   label: string;
   type?: "text" | "email" | "textarea";
   required?: boolean;
+  /** Ocupa media fila desde tablet (dos campos por línea). */
+  half?: boolean;
 };
 
 /**
@@ -44,25 +46,26 @@ export function ElementorForm({
     });
   }
 
-  const group = { paddingInline: colGap / 2, marginBottom: rowGap };
+  const gutter = fields.some((f) => f.half) ? Math.max(colGap, 12) : colGap;
+  const group = { paddingInline: gutter / 2, marginBottom: rowGap };
   const field =
-    "block w-full rounded-[3px] border border-[#F0F2F6] bg-[#F0F2F6] px-[14px] py-[5px] font-display text-[13px] leading-[1.4] font-normal text-[#7E7E7E] outline-none focus:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]";
+    "block w-full rounded-xl border border-navy/15 bg-white px-3.5 py-2 font-sans text-[0.95rem] leading-[1.5] font-normal text-ink outline-none transition-[border-color,box-shadow] duration-200 hover:border-navy/30 focus:border-green-btn focus:shadow-[0_0_0_4px_rgba(9,137,60,0.15)]";
 
   return (
     <form onSubmit={onSubmit} aria-busy={pending}>
       <input type="hidden" name="formulario" value={formName} />
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
-      <div className="flex flex-wrap" style={{ marginInline: -colGap / 2, marginBottom: -rowGap }}>
+      <div className="flex flex-wrap" style={{ marginInline: -gutter / 2, marginBottom: -rowGap }}>
         {fields.map((f) => {
           const id = `form-field-${f.name}`;
           const error = state?.errors?.[f.name];
           return (
-            <div key={f.name} className="w-full" style={group}>
-              <label htmlFor={id} className="block w-fit pb-[10px] font-display leading-none font-semibold text-black">
+            <div key={f.name} className={`w-full ${f.half ? "md:w-1/2" : ""}`} style={group}>
+              <label htmlFor={id} className="block w-fit pb-1 font-display text-[0.85rem] leading-none font-semibold text-navy">
                 {f.label}
               </label>
               {f.type === "textarea" ? (
-                <textarea id={id} name={f.name} rows={4} required={f.required} className={`${field} h-[96px] ${error ? "border-[#d9534f]" : ""}`} />
+                <textarea id={id} name={f.name} rows={4} required={f.required} className={`${field} h-[96px] resize-y ${error ? "border-[#d9534f]" : ""}`} />
               ) : (
                 <input
                   id={id}
@@ -70,7 +73,7 @@ export function ElementorForm({
                   type={f.type ?? "text"}
                   size={1}
                   required={f.required}
-                  className={`${field} min-h-[40px] ${error ? "border-[#d9534f]" : ""}`}
+                  className={`${field} min-h-[42px] ${error ? "border-[#d9534f]" : ""}`}
                 />
               )}
               {error && <span className="mt-[10px] block text-[1em] leading-none text-[#d9534f]">{error}</span>}
@@ -81,14 +84,14 @@ export function ElementorForm({
           <button
             type="submit"
             disabled={pending}
-            className={`flex w-full items-center justify-center rounded bg-[#113B70] px-[30px] py-[15px] font-display text-[0.938rem] leading-none font-medium tracking-[0.5px] text-white uppercase max-lg:text-[0.9rem] max-md:text-[0.8rem] ${buttonSize === "lg" ? "min-h-[59px]" : "min-h-[40px]"}`}
+            className={`e-btn !flex w-full disabled:opacity-60 ${buttonSize === "lg" ? "min-h-[56px]" : "min-h-[42px]"}`}
           >
             Send
           </button>
         </div>
       </div>
       {state && (
-        <div role="alert" className={`my-[10px] text-[1em] leading-none ${state.ok ? "text-[#5cb85c]" : "text-[#d9534f]"}`}>
+        <div role="alert" className={`my-[10px] text-[1em] leading-none ${state.ok ? "font-semibold text-green-btn" : "text-[#d9534f]"}`}>
           {state.message}
         </div>
       )}

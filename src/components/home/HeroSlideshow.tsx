@@ -5,7 +5,7 @@ import { media } from "@/lib/media";
 
 /**
  * Fondo "slideshow" de Elementor de la portada: transición fade de 500 ms, cada 5 s, en bucle,
- * con efecto Ken Burns hacia dentro (la imagen activa escala a 1.3 en 20 s y al salir vuelve en 10 s).
+ * con efecto Ken Burns hacia dentro (la imagen activa escala a 1.08 en 20 s y al salir vuelve en 10 s).
  */
 export function HeroSlideshow({ images }: { images: string[] }) {
   const [active, setActive] = useState(0);
@@ -36,7 +36,7 @@ export function HeroSlideshow({ images }: { images: string[] }) {
               backgroundImage: `url("${media(src)}")`,
               transitionProperty: "transform",
               transitionDuration: i === active ? "20s" : "10s",
-              transform: i === active && zoom ? "scale(1.3)" : "scale(1)",
+              transform: i === active && zoom ? "scale(1.08)" : "scale(1)",
             }}
           />
         </div>

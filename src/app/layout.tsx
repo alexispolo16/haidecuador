@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { Lato, Maven_Pro } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Hanken_Grotesk, Sora } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
 import { media } from "@/lib/media";
 
-// Mismas familias que el sitio original (Google Fonts: Maven Pro y Lato, todos los pesos).
-const maven = Maven_Pro({ variable: "--font-maven", subsets: ["latin"] });
-const lato = Lato({ variable: "--font-lato", subsets: ["latin"], weight: ["100", "300", "400", "700", "900"], style: ["normal", "italic"] });
+// Display técnico y seguro (Sora) + texto limpio y muy legible (Hanken Grotesk).
+const sora = Sora({ variable: "--font-sora", subsets: ["latin"], display: "swap" });
+const hanken = Hanken_Grotesk({ variable: "--font-hanken", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.haid.com.ec"),
@@ -18,9 +18,11 @@ export const metadata: Metadata = {
   icons: { icon: media("2024/06/cropped-favicon-192x192.png"), apple: media("2024/06/cropped-favicon-180x180.png") },
 };
 
+export const viewport: Viewport = { themeColor: "#06223F" };
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${maven.variable} ${lato.variable}`} suppressHydrationWarning>
+    <html lang="es" className={`${sora.variable} ${hanken.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">{children}</main>

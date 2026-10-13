@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
+import { UsageTable } from "@/components/productos/UsageTable";
+import { Shrimp } from "@/components/Shrimp";
 import { ProductTabs } from "@/components/productos/ProductTabs";
 import { engorde, iniciadores, postTransferencia, salud } from "@/components/productos/TabPanels";
 import iconoIniciadores from "@/components/productos/icono-iniciadores.svg";
@@ -47,17 +49,18 @@ export default function ProductosPage() {
       <PageHero title="Productos" image="2024/06/MG_1500-scaled.jpg" />
 
       {/* Soluciones nutricionales: pestañas por línea de producto */}
-      <section className="bg-[#FAFAFA] py-[2%]">
+      <section className="bg-[#FAFAFA] py-6">
         <div className="e-container">
           <div className="p-2.5">
-            <div className="py-[2%]">
+            <div className="pb-4">
               <h2 className="text-center text-navy">Soluciones nutricionales </h2>
             </div>
-            <div className="mt-5">
+            <div>
               <ProductTabs items={tabs} />
             </div>
-            <div className="mt-5 px-[5px] pb-[5px] text-center text-[#313131]">
-              <p>
+            <div className="relative mt-6 overflow-hidden rounded-[20px] bg-gradient-to-r from-navy to-deep px-6 py-6 md:px-10 md:py-7">
+              <Shrimp gap="transparent" className="pointer-events-none absolute -top-[30%] -right-[4%] w-[min(420px,70%)] text-white opacity-[0.08]" />
+              <p className="relative mx-auto !mb-0 max-w-[88ch] border-l-[3px] border-leaf pl-5 text-[1.02rem] leading-relaxed text-white/90 md:text-[1.1rem]">
                 A través de un sistema integral de alta tecnología basado en la I+D, HAID presenta productos de alto desempeño para cubrir las necesidades
                 nutricionales en las diferentes etapas del cultivo de camarones, con el objetivo de construir sinergia entre el servicio técnico, la creación de
                 valor y la maximización de rentabilidad de nuestros clientes
@@ -68,7 +71,7 @@ export default function ProductosPage() {
       </section>
 
       {/* Soluciones a la medida */}
-      <section className="py-[60px]">
+      <section className="py-[36px]">
         <div className="e-container">
           <h2 className="text-center text-navy normal-case">Soluciones a la medida</h2>
           <div className="mt-5 px-[17%] py-[1%] text-center">
@@ -88,7 +91,7 @@ export default function ProductosPage() {
       </section>
 
       {/* Sugerencias de alimentación */}
-      <section className="bg-[#FAFAFA] py-[60px]">
+      <section className="bg-[#FAFAFA] py-[36px]">
         <div className="e-container flex gap-5 max-md:flex-col">
           <div className="flex shrink-0 flex-col justify-center gap-5 p-2.5 md:w-[33.145%]">
             <h2 className="text-navy normal-case max-lg:text-[30px] max-md:text-center">Sugerencias de alimentación</h2>
@@ -111,20 +114,10 @@ export default function ProductosPage() {
       </section>
 
       {/* Tabla de sugerencia de uso */}
-      <section className="pt-[50px] pb-[60px]">
-        <h2 className="text-center text-navy normal-case">Tabla de sugerencia de uso</h2>
-        <div className="mt-5 p-2.5">
-          <div className="e-container">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={media("2024/06/tabla-recomendaciones-de-uso-20.svg")}
-              alt=""
-              width={2371}
-              height={989}
-              loading="lazy"
-              className="h-auto w-full"
-            />
-          </div>
+      <section className="pt-[24px] pb-[28px]">
+        <div className="e-container px-4">
+          <h2 className="mb-4 text-center text-navy normal-case">Tabla de sugerencia de uso</h2>
+          <UsageTable />
         </div>
       </section>
     </>

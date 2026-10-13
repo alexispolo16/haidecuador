@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CertSlides } from "@/components/home/CertSlides";
 import { HeroSlideshow } from "@/components/home/HeroSlideshow";
-import { ProductsCarousel } from "@/components/home/ProductsCarousel";
 import { boxIcons, certIcons } from "@/components/home/svgs";
 import { Reveal } from "@/components/Reveal";
-import { FaFasCircle } from "@/components/fa";
+import { Shrimp } from "@/components/Shrimp";
 import { media } from "@/lib/media";
 
 export const metadata: Metadata = { title: { absolute: "Haid Ecuador - Haid Ecuador" } };
@@ -36,9 +35,10 @@ const services = [
 ];
 
 const products = [
-  { image: "2024/06/haid-productos-01.png", title: "Starter Pro" },
-  { image: "2024/06/haid-productos-03.png", title: "Happiness" },
-  { image: "2024/06/haid-productos-02.png", title: "Starter" },
+  // `pos`: encuadre exacto del saco dentro del PNG (sin el margen transparente).
+  { image: "2024/06/haid-productos-01.png", title: "Starter Pro", pos: "54.3% 48.1%" },
+  { image: "2024/06/haid-productos-03.png", title: "Happiness", pos: "56.8% 48.8%" },
+  { image: "2024/06/haid-productos-02.png", title: "Starter", pos: "58.5% 47.5%" },
 ];
 
 const certSlides = [
@@ -56,29 +56,28 @@ const certifications = [
   "Global Good Agricultural Practices (GLobal GAP V 2.2 COMPOUND FEED MANUFACTURING)",
 ];
 
-// Botón de los widgets (verde, sin mayúsculas); al pasar el mouse toma el color de acento del kit.
-const greenBtn = "e-btn bg-green-btn normal-case hover:bg-amber";
-// Encabezado pequeño (h6) en azul.
-const eyebrow = "text-navy normal-case";
+const btn = "e-btn !bg-green-btn hover:!bg-navy";
 
 export default function Home() {
   return (
     <>
-      {/* Hero con slideshow de fondo */}
-      <section className="relative px-[1em] pt-[2em] pb-[6em]">
-        <HeroSlideshow images={["2024/06/工厂2023-5-scaled.jpg", "2024/06/Header.png"]} />
-        <div className="absolute inset-0 z-[1] bg-navy opacity-[0.79]" />
-        <div className="e-container relative z-[2] flex min-h-[65vh] items-center">
-          <Reveal animation="fadeInLeft" className="w-[53.333%] max-lg:w-full">
-            <div className="e-stack flex flex-col p-[1em] max-lg:pt-[10em]">
-              <h1 className="text-[3.5rem] leading-none normal-case max-lg:text-[4.25rem] max-md:text-center max-md:text-[2.2rem]">
-                Líder mundial en producción de piensos&nbsp;acuáticos
-              </h1>
-              <div className="pr-[12em] text-left text-[1.3em] leading-[1.8em] text-line max-lg:text-[1rem] max-md:pr-0 max-md:text-center max-md:text-[0.9rem]">
-                <p>Desarrollo de alta calidad y sostenible</p>
-              </div>
-              <div className="max-md:text-center">
-                <Link href="/alimentos-servicios/" className="e-btn bg-green-btn px-[35px] py-5 hover:bg-amber">
+      {/* Superficie: la fotografía se muestra entera a la derecha y se funde con el azul donde vive el titular */}
+      <section className="relative overflow-clip bg-deep pb-28 lg:pb-32">
+        <div className="relative max-lg:h-[260px] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[68%]">
+          <HeroSlideshow images={["2024/06/工厂2023-5-scaled.jpg", "2024/06/Header.png"]} />
+          <div className="absolute inset-0 z-[1] bg-gradient-to-t from-deep via-deep/10 to-transparent lg:bg-gradient-to-r lg:from-deep lg:via-deep/35 lg:to-transparent lg:to-60%" />
+          <div className="absolute inset-x-0 bottom-0 z-[1] h-24 bg-gradient-to-t from-deep to-transparent max-lg:hidden" />
+        </div>
+        <Shrimp gap="#06223f" className="pointer-events-none absolute top-[4%] -left-[10%] w-[min(900px,130vw)] text-white opacity-[0.045]" />
+        <div className="e-container relative z-[2] px-5 pt-2 lg:flex lg:min-h-[500px] lg:items-center lg:px-8 lg:pt-0">
+          <Reveal animation="fadeInLeft" className="lg:max-w-[600px]">
+            <div className="e-stack flex flex-col">
+              <h1 className="max-lg:max-w-none">Líder mundial en producción de piensos&nbsp;acuáticos</h1>
+              <p className="max-w-[34ch] border-l-[3px] border-leaf pl-4 text-[clamp(1.05rem,1rem+0.5vw,1.3rem)] leading-snug text-white/85">
+                Desarrollo de alta calidad y sostenible
+              </p>
+              <div className="pt-3">
+                <Link href="/alimentos-servicios/" className={btn}>
                   Ver más
                 </Link>
               </div>
@@ -87,56 +86,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pilares */}
-      <section className="px-[1em]">
+      {/* Pilares: una sola superficie compacta que flota entre el agua y la orilla */}
+      <section className="relative z-10 px-5 lg:px-8">
         <div className="e-container">
-          <Reveal
-            animation="fadeInUp"
-            className="relative z-[3] mt-[-9%] flex gap-[10px] p-[10px] max-md:flex-col"
-          >
-            {pillars.map((p, i) => (
-              <div
-                key={p.title}
-                className="flex min-h-[398px] flex-1 flex-col justify-start rounded-[5px] border-b-[5px] border-[#097635] bg-white p-[2%] shadow-[0_0_2px_0_#9A9A9A]"
-              >
-                <div className="text-center">
-                  <div className="mx-auto mb-4">
+          <Reveal animation="fadeInUp" className="-mt-20 lg:-mt-24">
+            <div className="grid overflow-hidden rounded-[22px] bg-white shadow-[0_26px_60px_-30px_rgba(6,34,63,0.5)] lg:grid-cols-3 max-md:rounded-[18px]">
+              {pillars.map((p, i) => (
+                <div
+                  key={p.title}
+                  className={`flex flex-col gap-2.5 p-5 lg:p-6 ${i === 0 ? "bg-navy text-white" : "text-muted"} ${
+                    i > 0 ? "border-line max-lg:border-t lg:border-l" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
                     <span
-                      className={`inline-block text-[90px] leading-none ${p.color} [&>svg]:relative [&>svg]:block [&>svg]:size-[1em]`}
+                      className="inline-block size-[60px] shrink-0 [&>svg]:block [&>svg]:h-full [&>svg]:w-full"
                       dangerouslySetInnerHTML={{ __html: boxIcons[i] }}
                     />
+                    <h3 className={`text-[1.4rem] leading-tight ${i === 0 ? "text-white" : ""}`}>{p.title}</h3>
                   </div>
-                  {/* Solo la primera tarjeta tiene margen propio en tablet/móvil en el original. */}
-                  <h3 className={`mt-2 mb-4 normal-case ${i === 0 ? "max-lg:mb-10 max-md:mb-[15px]" : ""}`}>{p.title}</h3>
-                  <p className="m-0">{p.text}</p>
+                  <p className="m-0 text-[0.88rem] leading-[1.55]">{p.text}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Nosotros */}
-      <section className="px-[1em] py-[6em]">
-        <div className="e-container flex max-lg:flex-col">
-          <Reveal animation="fadeInDown" className="flex w-1/2 max-lg:w-full">
-            <div className="flex w-full items-center p-[1em]">
+      {/* Nosotros: imagen que sangra a la izquierda, texto con entrada alta */}
+      <section className="relative overflow-clip py-12 lg:py-20">
+        <div className="e-container grid items-center gap-8 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-8">
+          <Reveal animation="fadeInLeft">
+            <div className="relative">
+              <Shrimp gap="#f6faf9" className="pointer-events-none absolute -bottom-[20%] -left-[12%] w-[78%] text-navy opacity-[0.09]" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={media("2024/06/工厂2023-6-scaled.jpg")}
                 alt=""
                 width={2560}
                 height={1440}
-                className="mx-auto block h-auto w-[1000px] max-w-full rounded"
+                loading="lazy"
+                className="relative block aspect-[4/3.3] w-full rounded-[28px] rounded-br-[120px] object-cover shadow-[0_30px_70px_-34px_rgba(6,34,63,0.55)] max-md:rounded-br-[70px]"
               />
             </div>
           </Reveal>
-          <Reveal animation="fadeInRight" className="w-1/2 max-lg:w-full">
-            <div className="e-stack flex flex-col py-[1em] pr-[1em] pl-[4em] max-lg:pl-[1em]">
-              <h6 className="text-navy">Nosotros</h6>
-              <h2 className="normal-case">Acerca de Haid Ecuador</h2>
-              <div className="text-black">
-                <p>
+          <Reveal animation="fadeInRight">
+            <div className="e-stack flex flex-col">
+              <h6>Nosotros</h6>
+              <h2>Acerca de Haid Ecuador</h2>
+              <div>
+                <p className="text-[1.12rem] leading-[1.6] text-ink">
                   Haid Ecuador Feed Cia. Ltda. forma parte del Grupo Haid, multinacional líder en nutrición y tecnología acuícola, fundada en
                   1998 en Guangdong, China, y reconocida globalmente por su innovación en alimentos balanceados, genética animal y servicios
                   técnicos integrados.
@@ -150,8 +149,8 @@ export default function Home() {
                   estratégicos.
                 </p>
               </div>
-              <div>
-                <Link href="/estos-es-haid" className={greenBtn}>
+              <div className="pt-2">
+                <Link href="/estos-es-haid" className={btn}>
                   Leer más
                 </Link>
               </div>
@@ -160,114 +159,147 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Servicio al cliente (en tablet y móvil la imagen va primero) */}
-      <section className="pt-[4em] pb-[5em]">
-        <div className="e-container flex max-lg:flex-col-reverse">
-          <Reveal animation="fadeInLeft" className="flex w-[54%] max-lg:w-full">
-            <div className="flex w-full flex-col justify-center py-[1em] pr-[4em] pl-[1em] max-lg:pr-[1em]">
-              <div className="e-stack flex flex-col">
-                <h6 className={eyebrow}>Servicio al cliente</h6>
-                <h2 className="normal-case">Optimización integral: valor y servicios para nuestros clientes</h2>
-                <div className="text-justify text-black">
-                  <p>
-                    La misión de Haid es proveer servicio técnico integrado que incluye: diagnóstico en campo, estrategia de alimentación de
-                    precisión, manejo de producción, asesoramiento en campo, capacitación al personal de camaronera y servicio de
-                    laboratorio&nbsp;
-                  </p>
-                </div>
-                <div className="flex pb-[10px] max-md:flex-col">
-                  {services.map((col, c) => (
-                    <div key={c} className={`w-1/2 p-[15px] max-md:w-full ${c === 1 ? "max-md:mt-[4%]" : ""}`}>
-                      <ul className="list-none p-0">
-                        {col.map((s, i) => (
-                          <li key={s} className={`flex items-center ${i > 0 ? "mt-[6px]" : ""} ${i < col.length - 1 ? "pb-[6px]" : ""}`}>
-                            <span className="flex pr-[14px]">
-                              <FaFasCircle className="mr-[3px] size-3 fill-navy" />
-                            </span>
-                            <span className="self-center pl-[5px] font-display text-[14px] leading-[28.8px] font-medium text-ink max-md:leading-[25.92px] max-lg:text-[1rem] max-md:text-[0.9rem]">
-                              {s}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <Link href="/alimentos-servicios/" className={greenBtn}>
+      {/* Servicio al cliente: agua somera (fondo mist) y el collage circular como pieza central */}
+      <section className="relative overflow-clip bg-mist py-8 lg:py-12">
+        <div className="e-container grid items-center gap-6 px-5 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:px-8">
+          <Reveal animation="fadeInLeft" className="max-lg:order-2">
+            <div className="e-stack flex flex-col">
+              <h6>Servicio al cliente</h6>
+              <h2>Optimización integral: valor y servicios para nuestros clientes</h2>
+              <p className="!mb-0 text-[1rem] text-ink">
+                La misión de Haid es proveer servicio técnico integrado que incluye: diagnóstico en campo, estrategia de alimentación de
+                precisión, manejo de producción, asesoramiento en campo, capacitación al personal de camaronera y servicio de
+                laboratorio&nbsp;
+              </p>
+              <ul className="m-0 grid list-none grid-cols-2 gap-x-4 p-0 md:gap-x-8">
+                {services.flat().map((sv) => (
+                  <li key={sv} className="flex items-center gap-2.5 border-b border-navy/15 py-2.5 md:gap-3">
+                    <span className="grid size-[18px] shrink-0 place-items-center rounded-full border border-navy/30">
+                      <span className="size-[7px] rounded-full bg-green-btn" />
+                    </span>
+                    <span className="font-display text-[0.85rem] leading-snug font-medium text-ink md:text-[0.92rem]">{sv}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="pt-1">
+                <Link href="/alimentos-servicios/" className={btn}>
                   Leer más
                 </Link>
               </div>
             </div>
           </Reveal>
-          <div className="flex w-[45.919%] max-lg:w-full">
-            <div className="flex w-full items-center justify-center p-[1em]">
+          <Reveal animation="fadeIn" className="max-lg:order-1">
+            <div className="relative mx-auto w-full max-w-[440px] max-md:max-w-[62%]">
+              <Shrimp gap="#eaf3f1" className="pointer-events-none absolute -bottom-[14%] -left-[34%] w-[80%] text-navy opacity-[0.1] max-lg:hidden" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={media("2024/06/Group-70-2.png")}
                 alt=""
                 width={1440}
                 height={1589}
-                className="mx-auto block h-auto w-full rounded max-lg:w-[45%] max-md:w-[80%]"
+                loading="lazy"
+                className="relative block h-auto w-full drop-shadow-[0_30px_40px_rgba(6,34,63,0.25)]"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Nuestros productos */}
-      <section className="px-[30px] py-[60px]">
-        <div className="e-container flex flex-col gap-5">
-          <h2 className="text-center normal-case">Nuestros productos</h2>
-          <div className="px-[50px] pt-[15px] text-center max-md:p-0">
-            <p>
-              Descubre nuestra gama premium de alimentos para camarones. Con ingredientes de calidad superior, garantizamos un crecimiento
-              saludable y un rendimiento óptimo para tus peces y crustáceos. ¡Alimenta el éxito de tu granja acuícola con nosotros!
-            </p>
-          </div>
-          <div className="p-[10px]">
-            <ProductsCarousel items={products} />
-          </div>
-          <div className="-mt-3 text-center">
-            <Link href="/alimentos-servicios/" className={greenBtn}>
-              Ver más
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Sostenibilidad */}
-      <section className="py-[5em]">
-        <div className="e-container flex max-lg:flex-col">
-          <div className="flex w-[45.919%] max-lg:w-full">
-            <div className="flex w-full items-center justify-center p-[1em]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={media("2024/06/DSC7762-scaled.jpg")}
-                alt=""
-                width={2560}
-                height={1707}
-                className="mx-auto block h-auto w-full rounded-[5px] max-lg:w-[45%] max-md:w-full"
-              />
-            </div>
-          </div>
-          <Reveal animation="fadeInLeft" className="flex w-[54%] max-lg:w-full">
-            <div className="e-stack flex w-full flex-col justify-center py-[1em] pr-[4em] pl-[1em] max-lg:pr-[1em]">
-              <h6 className={eyebrow}>Sostenibilidad</h6>
-              <h2 className="normal-case">Producción Sostenible de Ingredientes</h2>
-              <div className="-mb-[17px] text-black">
-                <p>
-                  Los productores de materias primas de origen marino deben adoptar prácticas sostenibles, asegurando el cumplimiento de
-                  estándares ambientales como MARIN TRUST, MSC, SMETA, RFVS y FIP, para garantizar un abastecimiento responsable. Además, no
-                  deben incluir especies en peligro según la Lista Roja de la UICN y deben documentar la procedencia de las pesquerías de
-                  reducción conforme al Código de la FAO. El abastecimiento de materias primas de origen vegetal también debe provenir de zonas
-                  libres de deforestación y conversión, así como de áreas de alto valor de conservación, aplicando normas certificadas por los
-                  miembros de ISEAL, promoviendo así una producción respetuosa con el entorno y la&nbsp;biodiversidad.
-                </p>
+      {/* Productos: texto a la izquierda y un escenario con los tres sacos a la derecha */}
+      <section className="bg-white px-5 py-12 lg:px-8 lg:py-16">
+        <div className="e-container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+          <Reveal animation="fadeInLeft">
+            <div className="e-stack flex flex-col">
+              <h2>Nuestros productos</h2>
+              <p>
+                Descubre nuestra gama premium de alimentos para camarones. Con ingredientes de calidad superior, garantizamos un crecimiento
+                saludable y un rendimiento óptimo para tus peces y crustáceos. ¡Alimenta el éxito de tu granja acuícola con nosotros!
+              </p>
+              <div className="pt-2">
+                <Link href="/alimentos-servicios/" className={btn}>
+                  Ver más
+                </Link>
               </div>
-              <div>
-                <Link href="/sostenibilidad" className={greenBtn}>
+            </div>
+          </Reveal>
+
+          <Reveal animation="fadeInRight">
+            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-navy to-deep px-2 py-8 shadow-[0_30px_70px_-36px_rgba(6,34,63,0.7)] sm:px-6 lg:py-10">
+              <Shrimp gap="transparent" className="pointer-events-none absolute -top-[6%] -right-[8%] w-[78%] text-white opacity-[0.07]" />
+                            <ul className="relative grid list-none grid-cols-3 items-end p-0">
+                {products.map((p, i) => (
+                  <li key={p.title} className={i === 1 ? "z-[2]" : "z-[1]"}>
+                    <Link href="/alimentos-servicios/" className="group flex flex-col items-center">
+                      <span
+                        role="img"
+                        aria-label={p.title}
+                        className={`block aspect-[510/720] bg-no-repeat drop-shadow-[0_22px_22px_rgba(0,0,0,0.45)] transition-transform duration-300 group-hover:-translate-y-2 ${
+                          i === 1 ? "h-[112px] sm:h-[185px] lg:h-[185px]" : "h-[84px] sm:h-[151px] lg:h-[151px]"
+                        }`}
+                        style={{ backgroundImage: `url("${media(p.image)}")`, backgroundSize: "204.3% auto", backgroundPosition: p.pos }}
+                      />
+                      <span className="relative mt-4 flex flex-col items-center gap-1.5 font-display text-[0.95rem] font-semibold text-white sm:text-[1.1rem]">
+                        {p.title}
+                        <span className="h-[3px] w-6 rounded-full bg-leaf transition-[width] duration-300 group-hover:w-12" />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Sostenibilidad: fotografía y contenido en dos columnas, sobre fondo claro */}
+      <section className="px-5 py-12 lg:px-8 lg:py-16">
+        <div className="e-container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+          <Reveal animation="fadeIn">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={media("2024/06/DSC7762-scaled.jpg")}
+              alt=""
+              width={2560}
+              height={1707}
+              loading="lazy"
+              className="block aspect-[4/3] w-full rounded-[20px] object-cover shadow-[0_26px_56px_-32px_rgba(6,34,63,0.6)] lg:aspect-[4/5]"
+            />
+          </Reveal>
+          <Reveal animation="fadeInRight">
+            <div className="e-stack flex flex-col">
+              <h6>Sostenibilidad</h6>
+              <h2>Producción Sostenible de Ingredientes</h2>
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-[0_16px_36px_-26px_rgba(6,34,63,0.5)] ring-1 ring-navy/10 md:p-5">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-navy text-white">
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M3 12c2.5-4 6-6 10-6 3 0 5.5 1.3 8 4-2.5 2.7-5 4-8 4-4 0-7.5-2-10-6z" />
+                      <path d="M3 12l-1-3m1 3l-1 3M16.5 10.5h.01" />
+                    </svg>
+                  </span>
+                  <p className="m-0 text-[0.92rem] leading-[1.6] text-ink/85">
+                    Los productores de materias primas de origen marino deben adoptar prácticas sostenibles, asegurando el cumplimiento de estándares
+                    ambientales como MARIN TRUST, MSC, SMETA, RFVS y FIP, para garantizar un abastecimiento responsable. Además, no deben incluir especies
+                    en peligro según la Lista Roja de la UICN y deben documentar la procedencia de las pesquerías de reducción conforme al Código de la
+                    FAO.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-[0_16px_36px_-26px_rgba(6,34,63,0.5)] ring-1 ring-navy/10 md:p-5">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-green-btn text-white">
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 19c0-8 4-13 14-14 0 9-4 14-12 14" />
+                      <path d="M5 19c2-5 5-8 9-10" />
+                    </svg>
+                  </span>
+                  <p className="m-0 text-[0.92rem] leading-[1.6] text-ink/85">
+                    El abastecimiento de materias primas de origen vegetal también debe provenir de zonas libres de deforestación y conversión, así como
+                    de áreas de alto valor de conservación, aplicando normas certificadas por los miembros de ISEAL, promoviendo así una producción
+                    respetuosa con el entorno y la&nbsp;biodiversidad.
+                  </p>
+                </div>
+              </div>
+              <div className="pt-2">
+                <Link href="/sostenibilidad" className={btn}>
                   Leer más
                 </Link>
               </div>
@@ -276,43 +308,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Presencia */}
-      <section className="bg-[#023894] p-[10px]">
-        <div className="e-container flex flex-col gap-5">
-          <h2 className="py-5 text-center text-[37px] text-white normal-case max-lg:text-[37px] max-md:text-[37px]">
-            Haid tiene presencia en más de 10 países y regiones
-          </h2>
+      {/* Presencia: titular y mapa en una sola fila */}
+      <section className="relative overflow-clip bg-[#023894] px-5 py-8 lg:px-8 lg:py-6">
+        <Shrimp gap="#023894" className="pointer-events-none absolute -top-[30%] -left-[6%] w-[min(520px,90vw)] text-white opacity-[0.07]" />
+        <div className="e-container relative z-[2] grid items-center gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+          <h2 className="text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] text-white max-lg:text-center">Haid tiene presencia en más de 10 países y regiones</h2>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={media("2024/06/Mapa-1.png")} alt="" width={1354} height={538} className="mx-auto block h-auto w-full" />
+          <img src={media("2024/06/Mapa-1.png")} alt="" width={1354} height={538} loading="lazy" className="mx-auto block h-auto max-h-[300px] w-auto max-w-full" />
         </div>
       </section>
 
       {/* Certificaciones */}
-      <section className="px-[1em] pt-[4em] pb-[6em]">
-        <div className="e-container flex max-lg:flex-col">
-          <div className="flex w-[45.919%] max-lg:w-full">
-            <div className="flex w-full items-center p-[1em]">
+      <section className="px-5 py-12 lg:px-8 lg:py-16">
+        <div className="e-container grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <Reveal animation="fadeInLeft">
+            <div className="overflow-hidden rounded-[28px] bg-white shadow-[0_30px_70px_-34px_rgba(6,34,63,0.5)] ring-1 ring-navy/10">
               <CertSlides images={certSlides} />
             </div>
-          </div>
-          <Reveal animation="fadeInRight" className="w-[54%] max-lg:w-full">
-            <div className="e-stack flex flex-col py-[1em] pr-[1em] pl-[4em] max-lg:pl-[1em]">
-              <h2 className="text-[3.2rem] normal-case max-lg:text-[2.938rem] max-md:text-[2.3rem]">Haid cuenta con las siguientes certificaciones</h2>
-              <div className="text-left text-muted">
+          </Reveal>
+          <Reveal animation="fadeInRight">
+            <div className="e-stack flex flex-col">
+              <h2 className="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)]">Haid cuenta con las siguientes certificaciones</h2>
+              <p className="text-muted">
                 Conoce nuestras certificaciones. Haid se certifica para dar un mejor servicio, garantizando altos estándares de calidad, gestión
                 ambiental y seguridad laboral en todas sus operaciones.
-              </div>
+              </p>
               <ul className="list-none p-0">
                 {certifications.map((c, i) => (
-                  <li
-                    key={c}
-                    className={`flex items-center justify-start text-left ${i > 0 ? "mt-[5px]" : ""} ${i < certifications.length - 1 ? "pb-[5px]" : ""}`}
-                  >
+                  <li key={c} className="flex items-center gap-4 border-b border-navy/15 py-3 first:border-t">
                     <span
-                      className="flex [&>svg]:mr-[12.5px] [&>svg]:size-[50px] [&>svg]:fill-white"
+                      className="flex shrink-0 [&>svg]:size-11 [&>svg]:fill-white"
                       dangerouslySetInnerHTML={{ __html: certIcons[i] }}
                     />
-                    <span className="self-center pl-[5px] text-[#8B8B8B]">{c}</span>
+                    <span className="font-display text-[1rem] leading-snug font-medium text-ink">{c}</span>
                   </li>
                 ))}
               </ul>

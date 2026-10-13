@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { media } from "@/lib/media";
 import { FaFasGlobeAmericas } from "./fa";
 
 /**
@@ -116,9 +115,9 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <div className={`notranslate flex items-center gap-[30px] ${className}`} translate="no">
-      <FaFasGlobeAmericas className="h-[22px] w-[22px] text-navy" />
-      <div className="flex">
+    <div className={`notranslate flex items-center gap-3 ${className}`} translate="no">
+      <FaFasGlobeAmericas className="size-[15px] text-navy" />
+      <div className="flex gap-1">
         {flags.map((f) => (
           <button
             key={f.lang}
@@ -126,17 +125,40 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
             title={f.title}
             aria-label={f.label}
             onClick={() => translateTo(f.lang)}
-            className="mr-0.5 box-content h-[18px] w-6 cursor-pointer bg-no-repeat py-px"
-            style={{ backgroundImage: `url("${media("plugins/flags.png")}")`, backgroundPosition: f.position }}
-          />
+            className="grid h-[16px] w-[22px] cursor-pointer place-items-center overflow-hidden rounded-[4px] shadow-[0_0_0_1px_rgba(6,34,63,0.2)] transition duration-200 hover:-translate-y-px hover:shadow-[0_0_0_2px_#09893c] focus-visible:shadow-[0_0_0_2px_#09893c]"
+          >
+            {f.lang === "en" ? <FlagUS /> : <FlagES />}
+          </button>
         ))}
       </div>
     </div>
   );
 }
 
-/** Sprite del plugin "Google Language Translator" (mismas posiciones que en el sitio original). */
 const flags = [
-  { lang: "en", title: "English", label: "Translate to English", position: "-116px -351px" },
-  { lang: "es", title: "Spanish", label: "Ver en español", position: "0 -322px" },
+  { lang: "en", title: "English", label: "Translate to English" },
+  { lang: "es", title: "Spanish", label: "Ver en español" },
 ];
+
+/** Banderas en SVG (nítidas y a todo color, sin el sprite borroso del plugin original). */
+function FlagUS() {
+  return (
+    <svg viewBox="0 0 30 22" className="block size-full" aria-hidden="true">
+      <rect width="30" height="22" fill="#fff" />
+      {[0, 2, 4, 6, 8, 10, 12].map((i) => (
+        <rect key={i} y={(i * 22) / 13} width="30" height={22 / 13} fill="#b22234" />
+      ))}
+      <rect width="13" height={(7 * 22) / 13} fill="#3c3b6e" />
+      {[0, 1, 2, 3].map((r) => [0, 1, 2].map((c) => <circle key={`${r}${c}`} cx={2.6 + c * 4 + (r % 2) * 2} cy={2.2 + r * 2.3} r="0.7" fill="#fff" />))}
+    </svg>
+  );
+}
+function FlagES() {
+  return (
+    <svg viewBox="0 0 30 22" className="block size-full" aria-hidden="true">
+      <rect width="30" height="22" fill="#c60b1e" />
+      <rect y="5.5" width="30" height="11" fill="#ffc400" />
+      <rect x="6" y="8.5" width="3.4" height="5" rx="1" fill="#a8312b" opacity="0.85" />
+    </svg>
+  );
+}

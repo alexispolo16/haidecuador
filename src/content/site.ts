@@ -29,9 +29,8 @@ export const legalDocs = [
 export const auditNotice = {
   title: "Auditoria Externa del estándar de alimentos ASC",
   contact: "+593 43915100",
-  date: "1,2,3 de julio – 2024",
-  auditor: "SCS Global Services",
-  auditorContact: "+1 510 452 8000",
+  date: "19 al 23 de octubre 2026",
+  auditor: "BUREAU VERITAS ECUADOR S.A",
 };
 
 /**

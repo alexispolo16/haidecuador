@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { VerticalTabs } from "@/components/VerticalTabs";
 import { FaFarCheckCircle, FaFarLightbulb, FaFasAward, FaFasRocket } from "@/components/fa";
+import { Shrimp } from "@/components/Shrimp";
 import { media } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Estos es Haid" };
@@ -15,7 +15,7 @@ const values = [
   { title: "Internamente", text: "Mejorar el valor para nuestros colaboradores." },
 ];
 
-const commitment: { Icon: typeof FaFasAward; title: string; text: ReactNode }[] = [
+const commitment: { Icon: typeof FaFasAward; title: string; text: string }[] = [
   {
     Icon: FaFasAward,
     title: "Misión",
@@ -24,24 +24,12 @@ const commitment: { Icon: typeof FaFasAward; title: string; text: ReactNode }[] 
   {
     Icon: FaFarLightbulb,
     title: "Visión",
-    text: (
-      <>
-        Ser líder en alimentos acuícolas de alta calidad, con excelencia en servicio y tecnología en América Latina.
-        <br />
-        <br />
-      </>
-    ),
+    text: "Ser líder en alimentos acuícolas de alta calidad, con excelencia en servicio y tecnología en América Latina.",
   },
   {
     Icon: FaFasRocket,
     title: "Espíritu",
-    text: (
-      <>
-        El mar recibe miles de ríos, la afluencia le hace inmenso.
-        <br />
-        <br />
-      </>
-    ),
+    text: "El mar recibe miles de ríos, la afluencia le hace inmenso.",
   },
 ];
 
@@ -101,58 +89,65 @@ const history = [
   },
 ];
 
+const photo = "block w-full rounded-[18px] object-cover shadow-[0_24px_50px_-30px_rgba(6,34,63,0.55)]";
+
 export default function EstoEsHaidPage() {
   return (
     <>
       <PageHero title="Haid Ecuador" image="2024/06/工厂2023-5-1-scaled.jpg" overlay={0.75} position="0px -290px" />
 
-      {/* Cultura empresarial */}
-      <section className="py-[2em]">
-        <div className="e-container flex flex-wrap">
-          <Reveal animation="fadeInDown" className="flex w-1/2 items-center justify-center p-[1em] max-lg:w-full">
-            <Reveal animation="fadeInLeft" className="w-full">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={media("2024/06/20240606-171916-scaled.jpg")} alt="" width={2560} height={1707} className="h-auto w-full rounded" />
-            </Reveal>
+      {/* Cultura empresarial: foto + texto, y los dos valores como fichas pequeñas */}
+      <section className="px-5 py-8 lg:px-8 lg:py-12">
+        <div className="e-container grid items-center gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+          <Reveal animation="fadeInLeft">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={media("2024/06/20240606-171916-scaled.jpg")} alt="" width={2560} height={1707} className={`${photo} aspect-[4/3]`} />
           </Reveal>
-          <Reveal animation="fadeInRight" className="e-stack flex w-1/2 flex-col justify-center py-[1em] pr-[1em] pl-[4em] max-lg:w-full max-lg:pl-[1em]">
-            <h6 className="text-navy">conócenos</h6>
-            <h2 className="normal-case">Cultura empresarial</h2>
-            <div className="text-[#343434]">
-              <p>
-                Nuestra cultura se inspira en la filosofía del Grupo Haid, que promueve una mentalidad de crecimiento constante basada en practicar,
-                aprender y ganar. Creemos que el desarrollo surge del esfuerzo diario, del aprendizaje continuo y de la colaboración para alcanzar metas
-                comunes.
-                <br />
-                En Haid Ecuador Feed Cia. Ltda., fomentamos una cultura que impulsa la excelencia, la innovación y la responsabilidad. Valoramos el trabajo
-                en equipo, la integridad y el compromiso como fundamentos para generar valor sostenible tanto para nuestros clientes como para nuestros
-                colaboradores.
-              </p>
-            </div>
-            {values.map((v) => (
-              <div key={v.title} className="e-card flex items-center text-justify max-md:block">
-                <FaFarCheckCircle className="mr-5 size-[46px] shrink-0 text-navy max-md:mr-0 max-md:mb-5 max-md:block" />
-                <div className="flex grow flex-col">
-                  <h3 className="mt-2 mb-1.5 text-[1.438rem] max-lg:text-[1.4rem] max-md:text-[1.2rem]">{v.title}</h3>
-                  <p className="m-0">{v.text}</p>
-                </div>
+          <Reveal animation="fadeInRight">
+            <div className="e-stack flex flex-col">
+              <h6>conócenos</h6>
+              <h2>Cultura empresarial</h2>
+              <div className="text-[#343434]">
+                <p className="!mb-2">
+                  Nuestra cultura se inspira en la filosofía del Grupo Haid, que promueve una mentalidad de crecimiento constante basada en practicar,
+                  aprender y ganar. Creemos que el desarrollo surge del esfuerzo diario, del aprendizaje continuo y de la colaboración para alcanzar metas
+                  comunes.
+                </p>
+                <p className="!mb-0">
+                  En Haid Ecuador Feed Cia. Ltda., fomentamos una cultura que impulsa la excelencia, la innovación y la responsabilidad. Valoramos el
+                  trabajo en equipo, la integridad y el compromiso como fundamentos para generar valor sostenible tanto para nuestros clientes como para
+                  nuestros colaboradores.
+                </p>
               </div>
-            ))}
+              <div className="grid gap-3 sm:grid-cols-2">
+                {values.map((v) => (
+                  <div key={v.title} className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_16px_36px_-26px_rgba(6,34,63,0.5)] ring-1 ring-navy/10">
+                    <FaFarCheckCircle className="size-9 shrink-0 text-navy" />
+                    <div>
+                      <h3 className="text-[1.1rem]">{v.title}</h3>
+                      <p className="m-0 text-[0.9rem] leading-snug">{v.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Nuestro compromiso */}
-      <section className="pt-[30px] pb-[50px]">
+      {/* Nuestro compromiso: tres fichas horizontales */}
+      <section className="bg-mist px-5 py-8 lg:px-8 lg:py-10">
         <div className="e-container flex flex-col gap-5">
-          <h2 className="text-center normal-case">Nuestro compromiso</h2>
-          <div className="flex gap-5 p-2.5 max-md:flex-col">
+          <h2 className="text-center">Nuestro compromiso</h2>
+          <div className="grid gap-3 md:grid-cols-3 md:gap-4">
             {commitment.map(({ Icon, title, text }) => (
-              <div key={title} className="flex flex-1 flex-col justify-center p-2.5">
-                <div className="e-card text-center">
-                  <Icon className="mx-auto mb-[17px] size-[38px] text-navy" />
-                  <h3 className="mb-1.5 text-[1.438rem] max-lg:text-[1.4rem] max-md:text-[1.2rem]">{title}</h3>
-                  <p className="m-0">{text}</p>
+              <div key={title} className="flex items-start gap-4 rounded-2xl bg-white p-5 shadow-[0_16px_36px_-26px_rgba(6,34,63,0.5)] ring-1 ring-navy/10">
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-navy text-white">
+                  <Icon className="size-[22px]" />
+                </span>
+                <div>
+                  <h3 className="mb-1 text-[1.2rem]">{title}</h3>
+                  <p className="m-0 text-[0.92rem] leading-snug">{text}</p>
                 </div>
               </div>
             ))}
@@ -161,43 +156,46 @@ export default function EstoEsHaidPage() {
       </section>
 
       {/* Centrado en el cliente */}
-      <section className="py-[88px] max-md:py-[65px]" style={{ backgroundImage: `url("${media("2024/06/haid-home-verde-07.png")}")` }}>
-        <div className="e-container flex flex-col gap-5 text-center">
-          <h2 className="text-[50px] text-[#FFFDFD] normal-case">Centrado en el cliente y orientado al esfuerzo</h2>
-          <p className="text-[35px] leading-[1.8rem] text-[#FFFCFC] max-md:leading-[25.92px]">
+      <section className="relative overflow-clip px-5 py-8 lg:px-8 lg:py-10" style={{ backgroundImage: `url("${media("2024/06/haid-home-verde-07.png")}")` }}>
+        <Shrimp gap="transparent" className="pointer-events-none absolute -top-[40%] -right-[4%] w-[min(480px,70vw)] text-white opacity-[0.1]" />
+        <div className="e-container relative flex flex-col gap-2 text-center">
+          <h2 className="text-[clamp(1.6rem,1.1rem+1.9vw,2.6rem)] text-[#FFFDFD]">Centrado en el cliente y orientado al esfuerzo</h2>
+          <p className="mx-auto !mb-0 text-[clamp(1.15rem,1rem+0.8vw,1.6rem)] leading-snug text-[#FFFCFC]">
             <strong>“Practicar, aprender, ganar”</strong>
           </p>
         </div>
       </section>
 
       {/* Haid Group en el mundo */}
-      <section className="py-[4em]">
-        <div className="e-container flex flex-wrap">
-          <Reveal animation="fadeInLeft" className="e-stack flex w-[57.326%] flex-col justify-center py-[1em] pr-[4em] pl-[1em] max-lg:w-full max-lg:pr-[1em]">
-            <h2 className="normal-case">Haid Group en el mundo</h2>
-            <div className="text-black">
-              <p>
-                Haid Group lleva a cabo el diseño industrial con una perspectiva internacional. En la actualidad, el negocio de la compañía cubre el sur
-                de Asia, el sudeste de Asia, América, África y otras regiones.
-              </p>
-              <p>Establecer filiales en muchos países, incluidos Vietnam, Singapur, Estados Unidos, India, Indonesia, Ecuador y otros países.</p>
+      <section className="px-5 py-8 lg:px-8 lg:py-12">
+        <div className="e-container grid items-start gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
+          <Reveal animation="fadeInLeft">
+            <div className="e-stack flex flex-col">
+              <h2>Haid Group en el mundo</h2>
+              <div className="text-black">
+                <p className="!mb-2">
+                  Haid Group lleva a cabo el diseño industrial con una perspectiva internacional. En la actualidad, el negocio de la compañía cubre el sur
+                  de Asia, el sudeste de Asia, América, África y otras regiones.
+                </p>
+                <p className="!mb-0">Establecer filiales en muchos países, incluidos Vietnam, Singapur, Estados Unidos, India, Indonesia, Ecuador y otros países.</p>
+              </div>
+              <h3 className="!mt-6 text-[1.5rem]">Historia</h3>
+              <div className="!mt-3">
+                <VerticalTabs items={history} />
+              </div>
             </div>
-            <h3 className="text-[2rem] normal-case max-lg:text-[2.938rem] max-md:text-[2.3rem]">Historia</h3>
-            <VerticalTabs items={history} />
           </Reveal>
-          <div className="flex w-[42.593%] items-center p-[1em] max-lg:w-full">
+          <Reveal animation="fadeInRight" className="lg:sticky lg:top-24">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2024/06/HAID-18-scaled.jpg")} alt="" width={2560} height={1707} className="h-auto w-full rounded" loading="lazy" />
-          </div>
+            <img src={media("2024/06/HAID-18-scaled.jpg")} alt="" width={2560} height={1707} loading="lazy" className={`${photo} aspect-[4/3] lg:aspect-[3/4]`} />
+          </Reveal>
         </div>
       </section>
 
       {/* Frase */}
-      <section className="bg-navy py-[50px]">
+      <section className="bg-navy px-5 py-6 lg:px-8 lg:py-7">
         <div className="e-container">
-          <h2 className="text-center text-[40px] text-[#FFFDFD] italic normal-case max-md:text-[30px]">
-            “Reflexiona mientras avanzas, avanza mientras reflexionas.”
-          </h2>
+          <h2 className="text-center text-[clamp(1.3rem,1rem+1.2vw,2rem)] text-[#FFFDFD] italic">“Reflexiona mientras avanzas, avanza mientras reflexionas.”</h2>
         </div>
       </section>
     </>

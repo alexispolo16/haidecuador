@@ -2,78 +2,92 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nav } from "@/content/site";
 import { media } from "@/lib/media";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 /**
- * Cabecera idéntica a la plantilla Elementor del sitio original (post-91):
- * tres columnas (logo / menú / idiomas) sobre blanco al 58 %, menú hamburguesa
- * en tablet y móvil. En tablet la cabecera se superpone al contenido (margin-bottom -23 %).
+ * Cabecera sobre agua clara: logo, menú y idiomas en una sola línea; "Contáctanos" es la
+ * acción principal y va como píldora. En tablet y móvil el menú se abre como panel.
  */
 export function Header() {
   const pathname = usePathname();
   // El menú se cierra solo al cambiar de ruta: queda abierto únicamente en la ruta donde se abrió.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const open = openOn === pathname;
+  const cta = nav[nav.length - 1];
+  const links = nav.slice(0, -1);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenOn(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#FFFFFF94] max-lg:mb-[-23%] max-md:mb-0">
-      <div className="relative flex items-stretch">
-        {/* Logo */}
-        <div className="flex w-1/5 items-center p-[1em] max-lg:w-[34%] max-md:w-[38%]">
-          <Link href="/" aria-label="Haid Ecuador, inicio" className="-mt-[2%] block w-full text-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2024/05/1.海大logo无去掉背景.png")} alt="" width={1791} height={689} className="inline-block h-auto w-3/4 max-md:w-full" />
-          </Link>
-        </div>
+    <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_0_rgba(16,59,112,0.1)]">
+      {/* Filete de marca: azul → verde */}
+      <div className="h-[3px] bg-gradient-to-r from-navy via-blue to-green-btn" />
+      <div className="relative mx-auto flex h-[72px] max-w-[1360px] items-center gap-8 px-5 lg:px-8">
+        <Link href="/" aria-label="Haid Ecuador, inicio" className="block w-[112px] shrink-0 max-md:w-[92px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={media("2024/05/1.海大logo无去掉背景.png")} alt="" width={1791} height={689} className="block h-auto w-full !rounded-none" />
+        </Link>
 
-        {/* Menú */}
-        <div className="flex w-[63.018%] items-center p-[1em] max-lg:w-[36%] max-md:w-[20%]">
-          <nav aria-label="Principal" className="hidden w-full justify-end lg:flex">
-            <ul className="flex flex-wrap justify-end leading-normal">
-              {nav.map((item) => {
-                const active = pathname.startsWith(item.href);
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`relative block px-5 py-[13px] font-display text-[18px] leading-5 transition-colors duration-400 after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-green after:transition-opacity after:duration-400 ${
-                        active ? "text-black after:opacity-100" : "text-ink after:opacity-0 hover:text-black hover:after:opacity-100"
+        <nav aria-label="Principal" className="hidden flex-1 lg:block">
+          <ul className="flex items-center justify-center gap-0.5 leading-none xl:gap-2">
+            {links.map((item) => {
+              const active = pathname.startsWith(item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`group relative block px-3 py-[27px] font-display text-[0.88rem] font-medium whitespace-nowrap transition-colors xl:px-4 ${
+                      active ? "text-navy" : "text-ink/70 hover:text-navy"
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute inset-x-3 bottom-0 h-[3px] origin-center bg-green-btn transition-transform duration-300 xl:inset-x-4 ${
+                        active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                       }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+                    />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
+        <div className="ml-auto flex items-center gap-4 lg:ml-0 lg:gap-5">
+          <LanguageSwitcher />
+          <Link
+            href={cta.href}
+            aria-current={pathname.startsWith(cta.href) ? "page" : undefined}
+            className="hidden items-center rounded-lg bg-green-btn px-5 py-3 font-display text-[0.88rem] leading-none font-semibold text-white transition-colors duration-300 hover:bg-navy lg:inline-flex"
+          >
+            {cta.label}
+          </Link>
           <button
             type="button"
-            className="mx-auto grid place-items-center rounded-[3px] bg-black/5 p-[5.5px] text-[#33373d] lg:hidden"
+            className="grid size-11 place-items-center rounded-lg border border-navy/15 text-navy transition-colors hover:bg-mist lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setOpenOn(open ? null : pathname)}
           >
-            <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3.5 6h17M3.5 12h17M3.5 18h17" />}
+            <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
         </div>
 
-        {/* Idiomas */}
-        <div className="flex w-[16.315%] items-center p-2.5 max-lg:w-[30%] max-md:w-[42%]">
-          <LanguageSwitcher />
-        </div>
-
         {open && (
-          <nav id="mobile-nav" aria-label="Móvil" className="absolute inset-x-0 top-full -mt-[1em] bg-white lg:hidden">
-            <ul>
+          <nav id="mobile-nav" aria-label="Móvil" className="absolute inset-x-0 top-full border-t border-navy/10 bg-white shadow-[0_24px_40px_-20px_rgba(6,34,63,0.4)] lg:hidden">
+            <ul className="mx-auto max-w-[1360px] px-3 py-2">
               {nav.map((item) => {
                 const active = pathname.startsWith(item.href);
                 return (
@@ -81,8 +95,8 @@ export function Header() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`block border-l-8 border-transparent px-5 py-2.5 text-center font-display text-[18px] leading-5 ${
-                        active ? "bg-[#3f444b] text-white" : "text-[#33373d] hover:bg-[#3f444b] hover:text-white"
+                      className={`flex min-h-12 items-center border-l-[3px] px-4 py-3 font-display text-[1rem] font-medium ${
+                        active ? "border-green-btn bg-mist text-navy" : "border-transparent text-ink hover:bg-mist"
                       }`}
                     >
                       {item.label}

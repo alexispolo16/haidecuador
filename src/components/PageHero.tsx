@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { media } from "@/lib/media";
+import { Shrimp } from "./Shrimp";
 
 /**
  * Cabecera de página del sitio original: sección Elementor de alto mínimo 25vh,
@@ -33,12 +34,13 @@ export function PageHero({
 
   return (
     <section
-      className={`relative bg-cover bg-no-repeat px-[1em] py-[6em] [background-position:var(--hero-pos-t)] lg:[background-position:var(--hero-pos)] ${className}`}
+      className={`relative overflow-clip bg-cover bg-no-repeat px-5 py-12 [background-position:var(--hero-pos-t)] max-md:py-10 lg:px-8 lg:py-16 lg:[background-position:var(--hero-pos)] ${className}`}
       style={style}
     >
       <div className="absolute inset-0 bg-night" style={{ opacity: overlay }} />
-      <div className="e-container relative flex min-h-[25vh] items-center">
-        <div className="w-full p-[1em]">
+      <Shrimp className="pointer-events-none absolute -top-[10%] -right-[4%] w-[min(640px,110vw)] text-white opacity-[0.1]" />
+      <div className="e-container relative flex min-h-[14vh] items-end">
+        <div className="w-full">
           <h1>{title}</h1>
           {children}
         </div>

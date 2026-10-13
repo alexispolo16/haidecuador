@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Accordion } from "@/components/Accordion";
 import { ElementorForm } from "@/components/contacto/ElementorForm";
+import { PageHero } from "@/components/PageHero";
+import { Reveal } from "@/components/Reveal";
+import { Shrimp } from "@/components/Shrimp";
 import { media } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Responsabilidad Ambiental" };
@@ -43,115 +47,94 @@ const rows: { image: string; reverse?: boolean; faqs: Faq[] }[] = [
 export default function ResponsabilidadAmbientalPage() {
   return (
     <>
-      {/* Cabecera: contenedor con padding 8em 1em, capa #040E1A al 75 % */}
-      <section
-        className="relative flex min-h-[25vh] flex-col bg-cover bg-no-repeat px-[1em] py-[8em] [background-position:0px_0px] lg:[background-position:0px_-460px]"
-        style={{
-          backgroundImage: `url("${media("2024/06/HAID-18-scaled.jpg")}")`,
-        }}
-      >
-        <div className="absolute inset-0 bg-night opacity-75" />
-        <div className="e-container relative">
-          <div className="p-[1em]">
-            <h2 className="text-[4.625em] font-bold text-white max-md:text-[2.5em]">Responsabilidad Ambiental</h2>
-          </div>
+      <PageHero title="Responsabilidad Ambiental" image="2024/06/HAID-18-scaled.jpg" overlay={0.75} position="0px -460px" />
+
+      {/* Introducción: titular, explicación y acceso directo al formulario */}
+      <section className="px-5 py-10 lg:px-8 lg:py-14">
+        <div className="e-container grid items-center gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <Reveal animation="fadeInLeft">
+            <div className="e-stack flex flex-col">
+              <h6>Línea directa</h6>
+              <h2 className="max-w-[20ch] text-[clamp(1.6rem,1.1rem+1.7vw,2.5rem)]">
+                Ahora también puedes realizar tus comentarios o sugerenticas en cuanto a nuestras actividades
+              </h2>
+              <div className="pt-1">
+                <a href="#comentarios" className="e-btn !bg-green-btn hover:!bg-navy">
+                  Déjanos tus comentarios
+                </a>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal animation="fadeInRight">
+            <div className="rounded-[20px] bg-white p-6 text-[1rem] text-ink shadow-[0_24px_54px_-36px_rgba(6,34,63,0.5)] ring-1 ring-navy/10 lg:p-8">
+              <p>
+                Como parte de nuestro esfuerzo constante de comunicación directa y buscando tener una mayor cercanía con nuestros vecinos, comunidades y
+                clientes, ponemos a su disposición este servicio de contacto, por medio del cual nos puede manifestar sus dudas o inquietudes sobre las
+                practicas ambientales de nuestra compañía.
+              </p>
+              <p className="!mb-0 border-t border-navy/10 pt-4">
+                De antemano agradecemos su interés por conocer más sobre los procedimientos y operación de nuestra compañía. Así mismo, le garantizamos
+                un seguimiento detallado a sus comentarios.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <div className="mt-[8%] mb-[2%] flow-root px-[6%]">
-        <div className="e-container e-stack text-center">
-          <h2 className="text-[32px] normal-case max-lg:text-[32px] max-md:text-[32px]">
-            Ahora también puedes realizar tus comentarios o sugerenticas en cuanto a nuestras actividades
-          </h2>
-          <div className="text-black">
-            <p>
-              Como parte de nuestro esfuerzo constante de comunicación directa y buscando tener una mayor cercanía con nuestros vecinos, comunidades y
-              clientes, ponemos a su disposición este servicio de contacto, por medio del cual nos puede manifestar sus dudas o inquietudes sobre las
-              practicas ambientales de nuestra compañía.
-            </p>
-            <p>
-              De antemano agradecemos su interés por conocer más sobre los procedimientos y operación de nuestra compañía. Así mismo, le garantizamos
-              un seguimiento detallado a sus comentarios.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {rows.map((row) => (
-        <div key={row.image} className="p-[10px]">
-          <div className={`e-container flex gap-5 max-lg:flex-col ${row.reverse ? "flex-row-reverse" : ""}`}>
-            <div className="flex flex-1 flex-col justify-center p-[10px]">
+      {/* Preguntas frecuentes: las fotos igualan la altura de sus acordeones */}
+      {rows.map((row, r) => (
+        <section key={row.image} className={`px-5 py-8 lg:px-8 lg:py-10 ${r === 0 ? "bg-mist" : ""}`}>
+          <div className={`e-container grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10 ${row.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <Reveal animation="fadeIn" className="relative min-h-[240px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={media(row.image)} alt="" width={2560} height={1707} className="h-auto w-full rounded-lg" loading="lazy" />
-            </div>
-            <div className="flex flex-1 flex-col justify-center gap-5 p-[10px]">
-              {row.faqs.map((f) => (
-                <div key={f.q} className="rounded-lg border border-[#CCCCCC] p-[10px] text-center shadow-[1px_2px_10px_0px_rgba(0,0,0,0.5)]">
-                  <div className="p-[2%]">
-                    <h3 className={`mt-2 mb-4 text-[19px] max-lg:text-[19px] max-md:text-[19px] ${f.capitalize ? "" : "normal-case"}`}>{f.q}</h3>
-                    <p className="mb-0 text-[15px] leading-[28.8px] max-md:leading-[25.92px]">{f.a}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              <img
+                src={media(row.image)}
+                alt=""
+                width={2560}
+                height={1707}
+                loading="lazy"
+                className="absolute inset-0 block h-full w-full rounded-[20px] object-cover shadow-[0_30px_70px_-36px_rgba(6,34,63,0.55)]"
+              />
+            </Reveal>
+            <Reveal animation={row.reverse ? "fadeInLeft" : "fadeInRight"} className="flex flex-col justify-center">
+              <Accordion items={row.faqs.map((f) => ({ title: f.q, content: <p className="!mb-0 text-[0.98rem]">{f.a}</p> }))} defaultOpen={0} />
+            </Reveal>
           </div>
-        </div>
+        </section>
       ))}
 
-      <div className="my-[1%] p-[10px]">
-        <div className="e-container text-center text-black">
-          <p>
-            <em>
-              Cualquier queja, reclamo o inquietud de partes externas en relación con la responsabilidad ambiental de la empresa, puede presentarse a
-              la Línea directa de ayuda para asuntos <strong>“Responsabilidad Ambiental” </strong>de la empresa.
-            </em>
-          </p>
-        </div>
-      </div>
-
-      <div className="e-container text-center">
-        <h2 className="mb-[2%] normal-case">Déjanos tus comentarios</h2>
-      </div>
-
-      <div className="flex justify-center p-[10px] max-md:mx-auto max-md:w-[330.727px]">
-        <div className="w-[72.876%] shrink-0 max-md:w-full">
-          <div className="mb-[5%]">
+      {/* Formulario: aviso a la izquierda, campos a la derecha */}
+      <section id="comentarios" className="relative scroll-mt-24 overflow-clip bg-navy px-5 py-8 lg:px-8 lg:py-10">
+        <Shrimp gap="#103b70" className="pointer-events-none absolute -bottom-[10%] -left-[8%] w-[min(620px,100vw)] text-white opacity-[0.05]" />
+        <div className="e-container relative z-[2] grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+          <div className="e-stack flex flex-col lg:sticky lg:top-24">
+            <h2 className="text-white">Déjanos tus comentarios</h2>
+            <p className="!mb-0 border-l-[3px] border-leaf pl-4 text-[1.02rem] leading-relaxed text-white/85">
+              <em>
+                Cualquier queja, reclamo o inquietud de partes externas en relación con la responsabilidad ambiental de la empresa, puede presentarse a
+                la Línea directa de ayuda para asuntos <strong className="text-white">“Responsabilidad Ambiental” </strong>de la empresa.
+              </em>
+            </p>
+          </div>
+          <div className="rounded-[20px] bg-white p-5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.7)] md:p-6">
             <ElementorForm
               formName="responsabilidad-ambiental"
               buttonSize="lg"
-              rowGap={12}
-              colGap={8}
+              rowGap={10}
+              colGap={0}
               fields={[
-                {
-                  name: "nombre_apellido",
-                  label: "Nombres y Apellidos",
-                  required: true,
-                },
-                { name: "cargo", label: "Cargo", required: true },
-                { name: "empresa", label: "Empresa", required: true },
-                {
-                  name: "email",
-                  label: "Email",
-                  type: "email",
-                  required: true,
-                },
-                {
-                  name: "pais_provincia",
-                  label: "País/Provincia",
-                  required: true,
-                },
-                { name: "asunto", label: "Asunto", required: true },
-                {
-                  name: "mensaje",
-                  label: "Mensaje",
-                  type: "textarea",
-                  required: true,
-                },
+                { name: "nombre_apellido", half: true, label: "Nombres y Apellidos", required: true },
+                { name: "cargo", half: true, label: "Cargo", required: true },
+                { name: "empresa", half: true, label: "Empresa", required: true },
+                { name: "email", half: true, label: "Email", type: "email", required: true },
+                { name: "pais_provincia", half: true, label: "País/Provincia", required: true },
+                { name: "asunto", half: true, label: "Asunto", required: true },
+                { name: "mensaje", label: "Mensaje", type: "textarea", required: true },
               ]}
             />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

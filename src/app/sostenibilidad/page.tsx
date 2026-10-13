@@ -2,177 +2,13 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SustAccordion } from "@/components/sostenibilidad/Accordion";
-import { HorizontalTabs } from "@/components/sostenibilidad/HorizontalTabs";
-import { LogoCarousel } from "@/components/sostenibilidad/LogoCarousel";
+import { Shrimp } from "@/components/Shrimp";
 import { media } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Sostenibilidad" };
 
 // Textos copiados literalmente de https://www.haid.com.ec/sostenibilidad/
 
-/** Títulos h2 de la página (2.1rem; 2.5rem en tablet; sin capitalizar). */
-const h2 =
-  "text-[2.1rem] normal-case max-lg:text-[2.5rem] max-md:text-[2.1rem]";
-const list = "m-0 list-disc pl-10";
-
-// Plantilla "Certificaciones" (post 1051) incrustada en la última pestaña.
-const certificationLogos = [
-  { src: "2024/06/haid-logos-13-768x576.jpg", alt: "haid logos-13" },
-  { src: "2024/06/haid-logos-11-768x576.jpg", alt: "haid logos-11" },
-  { src: "2024/06/haid-logos-10-768x576.jpg", alt: "haid logos-10" },
-  { src: "2024/06/haid-logos-09-768x576.jpg", alt: "haid logos-09" },
-  { src: "2024/06/haid-logos-14-768x576.jpg", alt: "haid logos-14" },
-];
-
-const sourcingTabs = [
-  {
-    label: "Abastecimiento responsable",
-    content: (
-      <ul className={list}>
-        <li>
-          En HAID (Ecuador) FEED CIA. LTDA., realizamos una evaluación
-          sistemática de los riesgos de sostenibilidad asociados con el
-          productor de materias primas y con el fabricante de ingredientes. Con
-          base en los resultados de estas evaluaciones de riesgo o Due
-          Dilligence se toma la decision de adquisicion. Nuestro equipo de
-          adquisiciones se esfuerza por reducir el impacto ambiental causado por
-          la pesca y agricultura.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    label: "Evaluación de proveedores",
-    content: (
-      <ul className={list}>
-        <li>
-          El punto de partida es el cumplimiento del Código de Conducta de
-          Proveedores para gestionar los posibles riesgos socioambientales de
-          los ingredientes. Este código de conducta se combina con el Due
-          Diligence, que se llevará a cabo respecto los fabricantes de
-          ingredientes, así como a la producción de materias primas básica.
-          Estos incluyen proveedores locales e internacionales. Para esta
-          evaluación inicial, requerimos: <br />* Ficha Técnica de la materia
-          prima
-          <br />* Certificaciones aceptadas por ISEAL o algún esquema aceptado
-          por ASC.
-          <br />* Aplicación de nuestro Código de Conducta
-          <br />* Evaluación de Riesgos Due Dilligence.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    label: "Estándares adecuados",
-    content: (
-      <>
-        Los productores de materias primas de origen marino y de origen vegetal
-        deberán considerar prácticas sostenibles, asegurándose de que los
-        procesos de producción de las materias primas cumplan con estándares
-        medioambientales según los objetivos de la ODS: <br />{" "}
-        <u>
-          Productores de ingredientes de origen marino, HAID (Ecuador) FEED CIA.
-          LTDA:
-        </u>
-        <ul className={list}>
-          <li>
-            Se abastecerá de fuentes certificadas según estándares tales como:
-            MARIN TRUST, MSC, SMETA, RFVS y FIP.
-          </li>
-          <li>
-            El fabricante de materias primas debe garantizar que las especies
-            utilizadas no procedan de la de la captura de peces silvestres
-            clasificados como en peligro crítico o en peligro de extinción en la
-            Lista Roja de la UICN (Unión Internacional para la Conservación de
-            la Naturaleza).
-          </li>
-          <li>
-            Para las pesquerías de reducción: El productor debe presentar
-            documentación que constate que la captura no procede de pesca de
-            especies incluidas en la lista roja de UICN, tal como se define en
-            el Código de Conducta para la Pesca Responsable de la FAO.
-          </li>
-        </ul>
-        {"  "}
-        <u>
-          Productores de ingredientes de origen vegetal, HAID (Ecuador) FEED
-          CIA. LTDA:
-        </u>
-        <ul className={list}>
-          <li>
-            Se abastecerá de ingredientes de zonas que no procedan de
-            deforestación ilegal, ni de tierras agrícolas procedentes de la
-            conversión de tierras de zonas designadas de alto valor de
-            conservación. Se deben aplicar normas que cumplan con las
-            Directrices FEFAC que estén certificadas bajo estándares tales como:
-            RSPO, RTRS, DONAU SOJA, PROTERRA, ISCC PLUS, RAINFOREST.
-          </li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    label: "Comunicación con proveedores",
-    content: (
-      <>
-        Apreciamos que nuestro progreso se fundamenta en la colaboración con
-        nuestros asociados comerciales. Por ello, hemos establecido un Código de
-        Conducta que rige nuestra relación con ellos, abordando aspectos de
-        integridad, cumplimiento y sostenibilidad. Nos comprometemos a entablar
-        negociaciones únicamente con entidades o personas que se adhieran a las
-        pautas establecidas en nuestro Código de Conducta para Proveedores.{" "}
-        <br />
-        <br />{" "}
-        {/* Enlace con el color por defecto del tema (Hello Elementor). */}
-        <a
-          href={media("2024/07/COMP-04-Codigo-de-Conducta.pdf")}
-          className="text-[#c36] hover:text-[#336]"
-        >
-          Descargar Codigo de Conducta
-        </a>
-      </>
-    ),
-  },
-  {
-    label: "Adaptabilidad y revisión constante",
-    content: (
-      <p>
-        Nuestra política de abastecimiento se enfoca en adquirir fuentes
-        responsables de origen marino y vegetal, conforme a los requisitos de
-        ASC feed mill, los cuales se basan en los Objetivos de Desarrollo
-        Sostenible (ODS). Nos comprometemos a revisar regularmente nuestras
-        prácticas de abastecimiento para garantizar que estén alineadas con los
-        principios de sostenibilidad y contribuyan activamente al logro de los
-        ODS. Esta adaptabilidad nos permite no solo cumplir con los estándares
-        éticos y ambientales más altos, sino también promover un impacto
-        positivo en las comunidades y el medio ambiente en los&nbsp;que&nbsp;operamos.
-      </p>
-    ),
-  },
-  {
-    label: "Esquemas de certificacion\u00a0aceptados",
-    content: (
-      <>
-        <p>
-          HAID (Ecuador) FEED CIA. LTDA. se compromete a cumplir con el
-          abastecimiento y compra responsable de ingredientes.&nbsp; Realizaremos
-          revisiones periódicas de esta política para asegurarnos de que se
-          mantenga actualizada y sea efectiva en el logro de nuestros objetivos
-          de sostenibilidad.
-        </p>
-        <p />
-        {/* Plantilla Elementor 1051: contenedor con título y carrusel de logos. */}
-        <div className="flex flex-col gap-5 p-2.5">
-          <h2 className="text-center text-[25px] max-lg:text-[25px] max-md:text-[25px]">
-            Certificaciones
-          </h2>
-          <LogoCarousel images={certificationLogos} />
-        </div>
-        <p />
-      </>
-    ),
-  },
-];
 
 const commitments = [
   {
@@ -202,249 +38,217 @@ const commitments = [
   },
 ];
 
-const fish =
-  "Jurel/ Caballa/ Bonito/ Pinchagua/ Morenillo/ Sardina/ Botella/ Atún/ Albacora/ Dorado/ Merluza/ Macerela/ Gallina/ Picudillo/ Barrilete";
-
 const tableHead = [
-  "N°",
   "Ingrediente",
   "Materia prima básica",
   "Pesquería de origen (MP marina) / País de origen (MP terrestre)",
 ];
+const marine = "Anchoveta / Botella / Chuhueco / Corbata / Jurel / Macarela / Morenillo / Picudillo / Roncador / Sardina / Sardina redonda";
 const tableRows = [
-  ["1.", "Trigo", "Trigo", "Estados Unidos / Brasil"],
-  [
-    "2.",
-    "Torta de soya",
-    "Soya",
-    "Argentina / Estados Unidos / Paraguay / Argentina / Bolivia",
-  ],
-  [
-    "3.",
-    "Lecitina de soya",
-    "Soya",
-    "Argentina / China / Estados Unidos / Brasil / México",
-  ],
-  ["4.", "Harina de Pescado", fish, "Ecuador / Perú"],
-  ["5.", "Hidrolizado de pescado", fish, "Ecuador / Chile"],
-  ["6.", "Harina de origen aviar", "Pollo", "Estados Unidos / Italia / Brasil"],
+  ["Trigo", "Trigo", "Argentina / Brasil / Canada / Estados Unidos"],
+  ["Torta de soya", "Soya", "Argentina / Bolivia / Estados Unidos"],
+  ["Lecitina de soya", "Soya", "Argentina / Brasil / China / Usa"],
+  ["Harina de Pescado", marine, "Chile / Ecuador / Perú"],
+  ["Hidrolizado de pescado", marine, "Ecuador / Chile"],
+  ["Harina de origen aviar", "Pollo", "Brasil / Estados Unidos"],
 ];
+
+/** Divide «A / B / C» en etiquetas; si no hay barras, devuelve el texto tal cual. */
+function Origins({ value }: { value: string }) {
+  if (!value.includes("/")) return <>{value}</>;
+  return (
+    <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+      {value.split("/").map((v, i) => (
+        <li key={i} className="rounded-full bg-mist px-2.5 py-0.5 text-[0.78rem] leading-snug whitespace-nowrap text-navy ring-1 ring-navy/10">
+          {v.trim()}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+const energy = [
+  "En HAID nos comprometemos a implementar y mantener un sistema de gestión de la energía eficiente y sostenible, orientado a la mejora continua del desempeño energético y alineado con nuestros objetivos de calidad, productividad y sostenibilidad ambiental.",
+  "Establecemos y revisamos metas energéticas claras, asegurando la disponibilidad de recursos e información necesarios para cumplirlas. Cumplimos con la normativa vigente y otros compromisos relacionados con el uso y consumo de energía.",
+  "Promovemos la mejora continua del desempeño energético, priorizando la adquisición de productos eficientes y aplicando criterios de eficiencia en nuestros procesos y diseños.",
+  "Esta política guía nuestras decisiones y es comunicada a todo el personal y partes interesadas.",
+];
+
+const photo =
+  "block w-full rounded-[18px] object-cover shadow-[0_26px_56px_-32px_rgba(6,34,63,0.6)]";
 
 export default function SostenibilidadPage() {
   return (
     <>
-      <PageHero
-        title="Sostenibilidad"
-        image="2024/06/DSC7751-1-scaled.jpg"
-        className="max-md:px-0 max-md:py-[4em] max-md:[&_h1]:text-[3rem]"
-      />
+      <PageHero title="Sostenibilidad" image="2024/06/DSC7751-1-scaled.jpg" />
 
-      {/* Política de abastecimiento + tabs + política de energía */}
-      <section className="py-[4em] max-md:py-[2em]">
-        <div className="e-container flex flex-col gap-5">
-          <div className="flex gap-5 p-2.5 max-md:flex-wrap">
-            <div className="flex w-full flex-col justify-center p-2.5">
-              <div className="text-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={media("2024/06/DSC7723-768x1152.webp")}
-                  alt=""
-                  width={768}
-                  height={1152}
-                  className="inline-block h-auto w-[90%] rounded align-middle"
-                />
-              </div>
-            </div>
-            <div className="flex w-full flex-col justify-center gap-5 p-2.5">
-              <h2 className={h2}>
-                Política de abastecimiento y compra responsable de ingredientes.
-              </h2>
-              <div className="text-black">
-                <p>
-                  En HAID (Ecuador) FEED CIA. LTDA, nos comprometemos a
-                  garantizar el abastecimiento y la compra responsable de
-                  ingredientes para alimentos animales, provenientes de fuentes
-                  marinas y vegetales.
-                </p>
-                <p>
-                  Nuestra política de abastecimiento responsable incluye
-                  requisitos claramente definidos en cuanto a sostenibilidad,
-                  abordando tanto las preocupaciones sociales como ambientales.
-                  Esta política describe las estrategias adoptadas para adquirir
-                  insumos de manera ética y sostenible, asegurando que nuestras
-                  prácticas beneficien a las comunidades y al medio ambiente.
-                </p>
-                <p>
-                  A continuación, presentamos algunas directrices clave para el
-                  abastecimiento y la compra responsable de ingredientes:
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-lg:order-last max-lg:pr-[9px]">
-            <HorizontalTabs items={sourcingTabs} />
-          </div>
-
-          <div className="flex gap-5 p-2.5 max-md:flex-wrap">
-            <div className="flex shrink-0 grow-0 flex-col justify-center gap-5 p-2.5 md:w-[43.456%] max-md:w-full">
-              <h2 className={h2}>POLÍTICA DE GESTIÓN DE LA ENERGÍA</h2>
-              <div className="text-black">
-                <p>
-                  En HAID nos comprometemos a implementar y mantener un sistema
-                  de gestión de la energía eficiente y sostenible, orientado a
-                  la mejora continua del desempeño energético y alineado con
-                  nuestros objetivos de calidad, productividad y sostenibilidad
-                  ambiental.
-                  <br />
-                  Establecemos y revisamos metas energéticas claras, asegurando
-                  la disponibilidad de recursos e información necesarios para
-                  cumplirlas. Cumplimos con la normativa vigente y otros
-                  compromisos relacionados con el uso y consumo de energía.
-                  <br />
-                  Promovemos la mejora continua del desempeño energético,
-                  priorizando la adquisición de productos eficientes y aplicando
-                  criterios de eficiencia en nuestros procesos y diseños.
-                  <br />
-                  Esta política guía nuestras decisiones y es comunicada a todo
-                  el personal y partes interesadas.
-                </p>
-              </div>
-            </div>
-            <div className="flex w-full flex-col justify-center p-2.5">
-              <div className="text-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={media("2025/11/politicas-768x507.jpeg")}
-                  alt=""
-                  width={768}
-                  height={507}
-                  className="inline-block h-auto w-[90%] rounded align-middle"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Compromiso público (en tablet/móvil la imagen va primero) */}
-      <section className="px-[1em] pt-[5em] max-lg:px-0 max-lg:pt-[2em]">
-        <div className="e-container flex max-lg:flex-col-reverse">
-          <Reveal
-            animation="fadeInLeft"
-            className="e-stack flex w-[54%] flex-col justify-center py-[1em] pr-[4em] pl-[1em] max-lg:w-full max-lg:pr-[1em]"
-          >
-            <h2 className={h2}>
-              Compromiso público para la transición a cadenas de suministro
-              libres de deforestación y conversión.
-            </h2>
-            <div className="-mb-[15px] text-left text-base leading-[1.8em] text-black max-md:text-[0.9rem]">
-              <p>
-                Nosotros, Haid (Ecuador) Feed Cia Ltda., reconociendo la urgente
-                necesidad de proteger nuestros bosques y otros ecosistemas
-                naturales, declaramos públicamente nuestro compromiso de
-                transitar hacia cadenas de suministro libres de pesca ilegal,
-                deforestación y conversión. Nos comprometemos a:
+      {/* 1 · Política de abastecimiento: texto con entrada alta y la fotografía como contrapeso */}
+      <section className="px-5 py-10 lg:px-8 lg:py-14">
+        <div className="e-container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+          <Reveal animation="fadeInLeft">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={media("2024/06/DSC7723-768x1152.webp")}
+              alt=""
+              width={768}
+              height={1152}
+              className={`${photo} aspect-[4/3] object-[50%_25%] lg:aspect-[4/4.6]`}
+            />
+          </Reveal>
+          <Reveal animation="fadeInRight">
+            <div className="e-stack flex flex-col">
+              <h2 className="text-[clamp(1.6rem,1.1rem+1.7vw,2.5rem)]">Política de abastecimiento y compra responsable de ingredientes.</h2>
+              <p className="text-[1.12rem] leading-[1.6] text-ink">
+                En HAID (Ecuador) FEED CIA. LTDA, nos comprometemos a garantizar el abastecimiento y la compra responsable de ingredientes para alimentos
+                animales, provenientes de fuentes marinas y vegetales.
+              </p>
+              <p className="!mb-0">
+                Nuestra política de abastecimiento responsable incluye requisitos claramente definidos en cuanto a sostenibilidad, abordando tanto las
+                preocupaciones sociales como ambientales. Esta política describe las estrategias adoptadas para adquirir insumos de manera ética y sostenible,
+                asegurando que nuestras prácticas beneficien a las comunidades y al medio ambiente.
               </p>
             </div>
           </Reveal>
-          <div className="flex w-[45.919%] flex-col justify-center p-[1em] max-lg:w-full">
+        </div>
+      </section>
+
+      {/* 2 · Gestión de la energía: banda de agua somera, políticas como lista */}
+      <section className="relative overflow-clip bg-mist px-5 py-10 lg:px-8 lg:py-14">
+        <Shrimp gap="#eaf3f1" className="pointer-events-none absolute -right-[6%] -bottom-[18%] w-[min(560px,90vw)] text-navy opacity-[0.07]" />
+        <div className="e-container relative grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+          <Reveal animation="fadeInLeft" className="max-lg:order-2">
+            <div className="e-stack flex flex-col">
+              <h2 className="text-[clamp(1.6rem,1.1rem+1.7vw,2.5rem)]">Política de gestión de la energía</h2>
+              <ul className="m-0 !mt-5 grid list-none gap-3 p-0">
+                {energy.map((t) => (
+                  <li key={t} className="flex gap-3 text-[0.98rem] leading-[1.6] text-ink/85">
+                    <span className="mt-[0.55rem] size-2 shrink-0 rounded-sm bg-green-btn" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal animation="fadeInRight" className="max-lg:order-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={media("2024/06/DSC5805-scaled.webp")}
-              alt=""
-              width={2560}
-              height={1707}
-              className="inline-block h-auto w-full rounded align-middle"
+            <img src={media("2025/11/politicas-768x507.jpeg")} alt="" width={768} height={507} loading="lazy" className={`${photo} aspect-[4/3]`} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 3 · Compromiso público: el fondo oscuro marca el cambio de tema y concentra los seis compromisos */}
+      <section className="relative overflow-clip bg-deep px-5 py-10 lg:px-8 lg:py-14">
+        <Shrimp gap="#06223f" className="pointer-events-none absolute -top-[6%] -right-[8%] w-[min(760px,120vw)] text-white opacity-[0.045]" />
+        <div className="e-container relative">
+          <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+            <Reveal animation="fadeInLeft" className="max-lg:order-2">
+              <div className="e-stack flex flex-col">
+                <h2 className="text-[clamp(1.6rem,1.1rem+1.7vw,2.5rem)] text-white">Compromiso público para la transición a cadenas de suministro libres de deforestación y conversión.</h2>
+                <p className="!mb-0 border-l-[3px] border-leaf pl-4 text-white/85">
+                  Nosotros, Haid (Ecuador) Feed Cia Ltda., reconociendo la urgente necesidad de proteger nuestros bosques y otros ecosistemas naturales,
+                  declaramos públicamente nuestro compromiso de transitar hacia cadenas de suministro libres de pesca ilegal, deforestación y conversión.
+                  Nos comprometemos a:
+                </p>
+              </div>
+            </Reveal>
+            <Reveal animation="fadeInRight" className="max-lg:order-1">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={media("2024/06/DSC5805-scaled.webp")} alt="" width={2560} height={1707} loading="lazy" className={`${photo} aspect-[4/3] max-h-[340px]`} />
+            </Reveal>
+          </div>
+
+          <Reveal animation="fadeInUp" className="mt-8">
+            <SustAccordion
+              items={commitments.map((c) => ({
+                title: c.title,
+                content: (
+                  <div className="rich">
+                    <ul>
+                      <li>{c.text}</li>
+                    </ul>
+                  </div>
+                ),
+              }))}
             />
-          </div>
-        </div>
-      </section>
-
-      <section className="px-[1em] pb-[5em]">
-        <div className="e-container">
-          <div className="p-[1em]">
-            <div className="mb-5 flex py-0.5">
-              <span className="mx-auto flex w-[12%] border-t-[3px] border-navy max-md:w-[40%]" />
-            </div>
-            <div className="overflow-hidden">
-              <Reveal animation="fadeInDown" className="p-2.5">
-                <SustAccordion
-                  items={commitments.map((c) => ({
-                    title: c.title,
-                    content: (
-                      <ul className={list}>
-                        <li>{c.text}</li>
-                      </ul>
-                    ),
-                  }))}
-                />
-              </Reveal>
-            </div>
-            <div className="pt-2.5 text-center text-black">
-              <p>
-                Con este compromiso, Haid (Ecuador) Feed Cia Ltda., se
-                compromete a asegurar el abastecimiento de ingredientes
-                vegetales libres de deforestación/conversión desde el 1 de mayo
-                2024 terminando su implementación&nbsp;en&nbsp;mayo&nbsp;2025.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sustentabilidad + tabla de ingredientes */}
-      <section className="pt-[1%] pb-[6%] max-lg:pt-0 max-lg:pb-[10%]">
-        <div className="e-container flex flex-col justify-center gap-5">
-          <div className="py-5">
-            <h2 className="text-center">Sustentabilidad</h2>
-          </div>
-          <div className="px-1 py-2.5 text-black">
-            <p>
-              Asegurarnos de fabricar nuestros alimentos a partir de materias
-              primas de origen responsable es esencial para nuestra
-              sostenibilidad. Cada producto se elabora con ingredientes
-              seleccionados por su bajo impacto ambiental y procedencia ética.
-              Nos comprometemos a que todos los componentes sean obtenidos de
-              manera responsable, apoyando así la preservación del medio
-              ambiente y las comunidades locales. Priorizamos la sostenibilidad
-              en cada etapa de nuestra cadena de suministro, garantizando
-              productos de alta calidad y respetuosos con el planeta.
+          </Reveal>
+          <div className="mx-auto mt-6 flex max-w-[860px] items-start gap-4 rounded-2xl bg-white/[0.07] p-5 ring-1 ring-white/15 md:items-center md:p-6">
+            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-leaf/20 text-leaf">
+              <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" />
+                <path d="M8.5 12l2.5 2.5 4.5-5" />
+              </svg>
+            </span>
+            <p className="m-0 max-w-none text-[1rem] leading-relaxed text-white/90 md:text-[1.05rem]">
+              Con este compromiso, Haid (Ecuador) Feed Cia Ltda., se compromete a asegurar el abastecimiento de ingredientes vegetales libres de
+              deforestación/conversión desde el <strong className="font-semibold text-leaf">1 de mayo 2024</strong> terminando su implementación&nbsp;en&nbsp;
+              <strong className="font-semibold text-leaf">mayo&nbsp;2025</strong>.
             </p>
           </div>
-          <div>
-            <table className="mx-auto w-full max-w-full">
+        </div>
+      </section>
+
+      {/* 4 · Sustentabilidad: ingredientes y su origen */}
+      <section className="px-5 py-10 lg:px-8 lg:py-14">
+        <div className="e-container flex flex-col gap-5">
+          <div className="relative overflow-hidden rounded-[22px] bg-gradient-to-br from-navy to-deep p-6 shadow-[0_28px_60px_-36px_rgba(6,34,63,0.8)] md:p-8 lg:grid lg:grid-cols-[0.6fr_1.4fr] lg:items-center lg:gap-12 lg:p-10">
+            <Shrimp gap="transparent" className="pointer-events-none absolute -right-[6%] -bottom-[24%] w-[min(460px,80%)] text-white opacity-[0.06]" />
+            <h2 className="relative text-white max-lg:mb-4">Sustentabilidad</h2>
+            <p className="relative !mb-0 !max-w-none border-l-[3px] border-leaf pl-4 text-[0.98rem] leading-[1.7] text-white/90 md:text-[1.02rem]">
+              Asegurarnos de fabricar nuestros alimentos a partir de materias primas de origen responsable es esencial para nuestra sostenibilidad. Cada
+              producto se elabora con ingredientes seleccionados por su bajo impacto ambiental y procedencia ética. Nos comprometemos a que todos los
+              componentes sean obtenidos de manera responsable, apoyando así la preservación del medio ambiente y las comunidades locales. Priorizamos la
+              sostenibilidad en cada etapa de nuestra cadena de suministro, garantizando productos de alta calidad y respetuosos con el planeta.
+            </p>
+          </div>
+
+          {/* Escritorio y tablet: tabla */}
+          <div className="overflow-x-auto rounded-2xl bg-white shadow-[0_24px_54px_-36px_rgba(6,34,63,0.5)] ring-1 ring-navy/10 max-md:hidden">
+            <table className="w-full min-w-[720px] border-collapse text-left">
               <thead>
-                <tr>
+                <tr className="bg-navy text-white">
                   {tableHead.map((h) => (
-                    <th
-                      key={h}
-                      className="border-t border-[rgba(128,128,128,0.5)] bg-navy px-[70px] py-5 text-center align-top font-['Montserrat',sans-serif] text-base leading-none font-semibold text-white first:rounded-tl-[5px] last:rounded-tr-[5px] max-lg:px-1 max-lg:py-[15px]"
-                    >
-                      <span className="font-display">{h}</span>
+                    <th key={h} className="px-4 py-3 align-middle font-display text-[0.82rem] leading-tight font-semibold">
+                      {h}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {tableRows.map((row) => (
-                  <tr
-                    key={row[0]}
-                    className="odd:bg-[rgba(128,128,128,0.07)] even:bg-[#f2f2f2]"
-                  >
-                    {row.map((cell, i) => (
-                      <td
-                        key={i}
-                        className="px-[15px] py-5 align-top font-display text-sm leading-none text-black hover:text-green-btn"
-                      >
-                        <div className="text-center">{cell}</div>
-                      </td>
-                    ))}
+                  <tr key={row[0]} className="border-t border-navy/10 transition-colors odd:bg-white even:bg-foam hover:bg-mist">
+                    <th scope="row" className="w-[22%] px-4 py-3 text-left align-top font-display text-[0.92rem] font-semibold text-navy">
+                      {row[0]}
+                    </th>
+                    <td className="px-4 py-3 align-top text-[0.88rem] leading-snug text-ink">
+                      <Origins value={row[1]} />
+                    </td>
+                    <td className="px-4 py-3 align-top text-[0.88rem] leading-snug text-ink">
+                      <Origins value={row[2]} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {/* Móvil: una ficha por ingrediente */}
+          <ul className="grid list-none gap-3 p-0 md:hidden">
+            {tableRows.map((row) => (
+              <li key={row[0]} className="rounded-2xl bg-white p-4 ring-1 ring-navy/10">
+                <p className="m-0 font-display text-[1rem] font-semibold text-navy">{row[0]}</p>
+                <dl className="m-0 mt-3 grid gap-2.5">
+                  {[1, 2].map((i) => (
+                    <div key={i}>
+                      <dt className="text-[0.72rem] font-semibold tracking-wide text-muted">{tableHead[i]}</dt>
+                      <dd className="m-0 mt-1 text-[0.88rem] leading-snug text-ink">
+                        <Origins value={row[i]} />
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>

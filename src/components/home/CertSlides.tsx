@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { media } from "@/lib/media";
-import { ChevronLeft, ChevronRight } from "./ProductsCarousel";
+import { ChevronLeft, ChevronRight } from "./chevrons";
 
 /**
  * Widget "Slides" de Elementor con los certificados: transición fade de 500 ms, autoplay cada 3 s,
@@ -21,7 +21,7 @@ export function CertSlides({ images }: { images: string[] }) {
   }, [n]);
 
   const arrow =
-    "absolute top-1/2 z-[1] inline-flex -translate-y-1/2 cursor-pointer text-[25px] leading-[28.8px] text-[rgba(238,238,238,0.9)] max-md:leading-[25.92px]";
+    "absolute top-1/2 z-[1] -translate-y-1/2 cursor-pointer grid size-10 place-items-center rounded-full bg-ink/55 text-[18px] backdrop-blur transition hover:bg-green-btn";
 
   return (
     <div
@@ -43,9 +43,9 @@ export function CertSlides({ images }: { images: string[] }) {
         tabIndex={0}
         onClick={() => setActive((i) => (i - 1 + n) % n)}
         onKeyDown={(e) => e.key === "Enter" && setActive((i) => (i - 1 + n) % n)}
-        className={`${arrow} left-[10px]`}
+        className={`${arrow} left-3`}
       >
-        <ChevronLeft className="size-[1em] fill-[rgba(238,238,238,0.9)]" />
+        <ChevronLeft className="size-[1em] fill-white" />
         <span className="sr-only">Previous slide</span>
       </div>
       <div
@@ -53,9 +53,9 @@ export function CertSlides({ images }: { images: string[] }) {
         tabIndex={0}
         onClick={() => setActive((i) => (i + 1) % n)}
         onKeyDown={(e) => e.key === "Enter" && setActive((i) => (i + 1) % n)}
-        className={`${arrow} right-[10px]`}
+        className={`${arrow} right-3`}
       >
-        <ChevronRight className="size-[1em] fill-[rgba(238,238,238,0.9)]" />
+        <ChevronRight className="size-[1em] fill-white" />
         <span className="sr-only">Next slide</span>
       </div>
     </div>
