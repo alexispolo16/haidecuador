@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Accordion } from "@/components/Accordion";
 import { ElementorForm } from "@/components/contacto/ElementorForm";
 import { PageHero } from "@/components/PageHero";
@@ -47,7 +48,7 @@ const rows: { image: string; reverse?: boolean; faqs: Faq[] }[] = [
 export default function ResponsabilidadAmbientalPage() {
   return (
     <>
-      <PageHero title="Responsabilidad Ambiental" image="2024/06/HAID-18-scaled.jpg" overlay={0.75} position="0px -460px" />
+      <PageHero title="Responsabilidad Ambiental" image="2024/06/HAID-18-scaled.jpg" overlay={0.75} position="50% 65%" />
 
       {/* Introducción: titular, explicación y acceso directo al formulario */}
       <section className="px-5 py-10 lg:px-8 lg:py-14">
@@ -86,14 +87,13 @@ export default function ResponsabilidadAmbientalPage() {
         <section key={row.image} className={`px-5 py-8 lg:px-8 lg:py-10 ${r === 0 ? "bg-mist" : ""}`}>
           <div className={`e-container grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10 ${row.reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
             <Reveal animation="fadeIn" className="relative min-h-[240px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={media(row.image)}
                 alt=""
                 width={2560}
                 height={1707}
-                loading="lazy"
                 className="absolute inset-0 block h-full w-full rounded-[20px] object-cover shadow-[0_30px_70px_-36px_rgba(6,34,63,0.55)]"
+                sizes="(min-width: 1025px) 600px, 100vw"
               />
             </Reveal>
             <Reveal animation={row.reverse ? "fadeInLeft" : "fadeInRight"} className="flex flex-col justify-center">

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CertSlides } from "@/components/home/CertSlides";
 import { HeroSlideshow } from "@/components/home/HeroSlideshow";
-import { boxIcons, certIcons } from "@/components/home/svgs";
 import { Reveal } from "@/components/Reveal";
 import { Shrimp } from "@/components/Shrimp";
-import { media } from "@/lib/media";
+import { media, optimized } from "@/lib/media";
 
 export const metadata: Metadata = { title: { absolute: "Haid Ecuador - Haid Ecuador" } };
 
@@ -70,7 +70,8 @@ export default function Home() {
         </div>
         <Shrimp gap="#06223f" className="pointer-events-none absolute top-[4%] -left-[10%] w-[min(900px,130vw)] text-white opacity-[0.045]" />
         <div className="e-container relative z-[2] px-5 pt-2 lg:flex lg:min-h-[500px] lg:items-center lg:px-8 lg:pt-0">
-          <Reveal animation="fadeInLeft" className="lg:max-w-[600px]">
+          {/* Sin animación de entrada: el titular es el LCP y debe pintarse de inmediato. */}
+          <div className="lg:max-w-[600px]">
             <div className="e-stack flex flex-col">
               <h1 className="max-lg:max-w-none">Líder mundial en producción de piensos&nbsp;acuáticos</h1>
               <p className="max-w-[34ch] border-l-[3px] border-leaf pl-4 text-[clamp(1.05rem,1rem+0.5vw,1.3rem)] leading-snug text-white/85">
@@ -82,7 +83,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
@@ -99,10 +100,8 @@ export default function Home() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span
-                      className="inline-block size-[60px] shrink-0 [&>svg]:block [&>svg]:h-full [&>svg]:w-full"
-                      dangerouslySetInnerHTML={{ __html: boxIcons[i] }}
-                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={media(`icons/pilar-${i + 1}.svg`)} alt="" width={400} height={300} className="block size-[60px] shrink-0 !rounded-none object-contain" />
                     <h3 className={`text-[1.4rem] leading-tight ${i === 0 ? "text-white" : ""}`}>{p.title}</h3>
                   </div>
                   <p className="m-0 text-[0.88rem] leading-[1.55]">{p.text}</p>
@@ -119,14 +118,13 @@ export default function Home() {
           <Reveal animation="fadeInLeft">
             <div className="relative">
               <Shrimp gap="#f6faf9" className="pointer-events-none absolute -bottom-[20%] -left-[12%] w-[78%] text-navy opacity-[0.09]" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={media("2024/06/工厂2023-6-scaled.jpg")}
                 alt=""
                 width={2560}
                 height={1440}
-                loading="lazy"
                 className="relative block aspect-[4/3.3] w-full rounded-[28px] rounded-br-[120px] object-cover shadow-[0_30px_70px_-34px_rgba(6,34,63,0.55)] max-md:rounded-br-[70px]"
+                sizes="(min-width: 1025px) 640px, 100vw"
               />
             </div>
           </Reveal>
@@ -191,14 +189,13 @@ export default function Home() {
           <Reveal animation="fadeIn" className="max-lg:order-1">
             <div className="relative mx-auto w-full max-w-[440px] max-md:max-w-[62%]">
               <Shrimp gap="#eaf3f1" className="pointer-events-none absolute -bottom-[14%] -left-[34%] w-[80%] text-navy opacity-[0.1] max-lg:hidden" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={media("2024/06/Group-70-2.png")}
                 alt=""
                 width={1440}
                 height={1589}
-                loading="lazy"
                 className="relative block h-auto w-full drop-shadow-[0_30px_40px_rgba(6,34,63,0.25)]"
+                sizes="(min-width: 1025px) 560px, 90vw"
               />
             </div>
           </Reveal>
@@ -236,7 +233,7 @@ export default function Home() {
                         className={`block aspect-[510/720] bg-no-repeat drop-shadow-[0_22px_22px_rgba(0,0,0,0.45)] transition-transform duration-300 group-hover:-translate-y-2 ${
                           i === 1 ? "h-[112px] sm:h-[185px] lg:h-[185px]" : "h-[84px] sm:h-[151px] lg:h-[151px]"
                         }`}
-                        style={{ backgroundImage: `url("${media(p.image)}")`, backgroundSize: "204.3% auto", backgroundPosition: p.pos }}
+                        style={{ backgroundImage: `url("${optimized(p.image, 640)}")`, backgroundSize: "204.3% auto", backgroundPosition: p.pos }}
                       />
                       <span className="relative mt-4 flex flex-col items-center gap-1.5 font-display text-[0.95rem] font-semibold text-white sm:text-[1.1rem]">
                         {p.title}
@@ -255,14 +252,13 @@ export default function Home() {
       <section className="px-5 py-12 lg:px-8 lg:py-16">
         <div className="e-container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
           <Reveal animation="fadeIn">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={media("2024/06/DSC7762-scaled.jpg")}
               alt=""
               width={2560}
               height={1707}
-              loading="lazy"
               className="block aspect-[4/3] w-full rounded-[20px] object-cover shadow-[0_26px_56px_-32px_rgba(6,34,63,0.6)] lg:aspect-[4/5]"
+              sizes="(min-width: 1025px) 520px, 100vw"
             />
           </Reveal>
           <Reveal animation="fadeInRight">
@@ -313,8 +309,7 @@ export default function Home() {
         <Shrimp gap="#023894" className="pointer-events-none absolute -top-[30%] -left-[6%] w-[min(520px,90vw)] text-white opacity-[0.07]" />
         <div className="e-container relative z-[2] grid items-center gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
           <h2 className="text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] text-white max-lg:text-center">Haid tiene presencia en más de 10 países y regiones</h2>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={media("2024/06/Mapa-1.png")} alt="" width={1354} height={538} loading="lazy" className="mx-auto block h-auto max-h-[300px] w-auto max-w-full" />
+          <Image src={media("2024/06/Mapa-1.png")} alt="" width={1354} height={538} className="mx-auto block h-auto max-h-[300px] w-auto max-w-full" sizes="(min-width: 768px) 760px, 100vw" />
         </div>
       </section>
 
@@ -336,10 +331,8 @@ export default function Home() {
               <ul className="list-none p-0">
                 {certifications.map((c, i) => (
                   <li key={c} className="flex items-center gap-4 border-b border-navy/15 py-3 first:border-t">
-                    <span
-                      className="flex shrink-0 [&>svg]:size-11 [&>svg]:fill-white"
-                      dangerouslySetInnerHTML={{ __html: certIcons[i] }}
-                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={media(`icons/certificacion-${i + 1}.svg`)} alt="" width={44} height={44} loading="lazy" className="block size-11 shrink-0 !rounded-none object-contain" />
                     <span className="font-display text-[1rem] leading-snug font-medium text-ink">{c}</span>
                   </li>
                 ))}

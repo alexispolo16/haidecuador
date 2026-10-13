@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { VerticalTabs } from "@/components/VerticalTabs";
 import { FaFarCheckCircle, FaFarLightbulb, FaFasAward, FaFasRocket } from "@/components/fa";
 import { Shrimp } from "@/components/Shrimp";
-import { media } from "@/lib/media";
+import { media, optimized } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Estos es Haid" };
 
@@ -94,14 +95,13 @@ const photo = "block w-full rounded-[18px] object-cover shadow-[0_24px_50px_-30p
 export default function EstoEsHaidPage() {
   return (
     <>
-      <PageHero title="Haid Ecuador" image="2024/06/工厂2023-5-1-scaled.jpg" overlay={0.75} position="0px -290px" />
+      <PageHero title="Haid Ecuador" image="2024/06/工厂2023-5-1-scaled.jpg" overlay={0.75} position="50% 41%" />
 
       {/* Cultura empresarial: foto + texto, y los dos valores como fichas pequeñas */}
       <section className="px-5 py-8 lg:px-8 lg:py-12">
         <div className="e-container grid items-center gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <Reveal animation="fadeInLeft">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2024/06/20240606-171916-scaled.jpg")} alt="" width={2560} height={1707} className={`${photo} aspect-[4/3]`} />
+            <Image src={media("2024/06/20240606-171916-scaled.jpg")} alt="" width={2560} height={1707} className={`${photo} aspect-[4/3]`} sizes="(min-width: 1025px) 600px, 100vw" />
           </Reveal>
           <Reveal animation="fadeInRight">
             <div className="e-stack flex flex-col">
@@ -156,7 +156,7 @@ export default function EstoEsHaidPage() {
       </section>
 
       {/* Centrado en el cliente */}
-      <section className="relative overflow-clip px-5 py-8 lg:px-8 lg:py-10" style={{ backgroundImage: `url("${media("2024/06/haid-home-verde-07.png")}")` }}>
+      <section className="relative overflow-clip px-5 py-8 lg:px-8 lg:py-10" style={{ backgroundImage: `url("${optimized("2024/06/haid-home-verde-07.png", 1920)}")` }}>
         <Shrimp gap="transparent" className="pointer-events-none absolute -top-[40%] -right-[4%] w-[min(480px,70vw)] text-white opacity-[0.1]" />
         <div className="e-container relative flex flex-col gap-2 text-center">
           <h2 className="text-[clamp(1.6rem,1.1rem+1.9vw,2.6rem)] text-[#FFFDFD]">Centrado en el cliente y orientado al esfuerzo</h2>
@@ -186,8 +186,7 @@ export default function EstoEsHaidPage() {
             </div>
           </Reveal>
           <Reveal animation="fadeInRight" className="lg:sticky lg:top-24">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2024/06/HAID-18-scaled.jpg")} alt="" width={2560} height={1707} loading="lazy" className={`${photo} aspect-[4/3] lg:aspect-[3/4]`} />
+            <Image src={media("2024/06/HAID-18-scaled.jpg")} alt="" width={2560} height={1707} className={`${photo} aspect-[4/3] lg:aspect-[3/4]`} sizes="(min-width: 1025px) 560px, 100vw" />
           </Reveal>
         </div>
       </section>

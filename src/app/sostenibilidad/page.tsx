@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SustAccordion } from "@/components/sostenibilidad/Accordion";
@@ -86,13 +87,13 @@ export default function SostenibilidadPage() {
       <section className="px-5 py-10 lg:px-8 lg:py-14">
         <div className="e-container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
           <Reveal animation="fadeInLeft">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={media("2024/06/DSC7723-768x1152.webp")}
               alt=""
               width={768}
               height={1152}
               className={`${photo} aspect-[4/3] object-[50%_25%] lg:aspect-[4/4.6]`}
+              sizes="(min-width: 1025px) 560px, 100vw"
             />
           </Reveal>
           <Reveal animation="fadeInRight">
@@ -130,8 +131,7 @@ export default function SostenibilidadPage() {
             </div>
           </Reveal>
           <Reveal animation="fadeInRight" className="max-lg:order-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2025/11/politicas-768x507.jpeg")} alt="" width={768} height={507} loading="lazy" className={`${photo} aspect-[4/3]`} />
+            <Image src={media("2025/11/politicas-768x507.jpeg")} alt="" width={768} height={507} className={`${photo} aspect-[4/3]`} sizes="(min-width: 1025px) 560px, 100vw" />
           </Reveal>
         </div>
       </section>
@@ -152,8 +152,7 @@ export default function SostenibilidadPage() {
               </div>
             </Reveal>
             <Reveal animation="fadeInRight" className="max-lg:order-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={media("2024/06/DSC5805-scaled.webp")} alt="" width={2560} height={1707} loading="lazy" className={`${photo} aspect-[4/3] max-h-[340px]`} />
+              <Image src={media("2024/06/DSC5805-scaled.webp")} alt="" width={2560} height={1707} className={`${photo} aspect-[4/3] max-h-[340px]`} sizes="(min-width: 1025px) 560px, 100vw" />
             </Reveal>
           </div>
 

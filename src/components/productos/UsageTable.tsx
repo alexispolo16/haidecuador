@@ -3,9 +3,9 @@
  * Las columnas son las etapas del cultivo (peso del camarón); cada barra de color es un alimento.
  */
 
-const stages = ["PL10", "PL20", "1g", "3g", "8g"] as const;
+export const stages = ["PL10", "PL20", "1g", "3g", "8g"] as const;
 
-const color = {
+export const color = {
   pro: "#e0d11f",
   starter: "#f79524",
   speed: "#a04042",
@@ -59,8 +59,18 @@ const groups: Group[] = [
   },
 ];
 
+/** Filas de la tabla en las que aparece un alimento (por su color), con la casilla de cada barra. */
+export function usageRows(c: string) {
+  return groups.flatMap((g) =>
+    g.rows
+      .map((row) => (Object.entries(row) as [string, Bar][]).filter(([, b]) => b.color === c).map(([ci, b]) => ({ stage: Number(ci), text: b.text })))
+      .filter((r) => r.length > 0)
+      .map((bars) => ({ group: g.label, bars })),
+  );
+}
+
 /** Etiqueta de etapa para cada columna (se usa en la versión móvil). */
-const stageLabel = ["PL10", "PL20", "1 g", "3 g", "8 g – cosecha"];
+export const stageLabel = ["PL10", "PL20", "1 g", "3 g", "8 g – cosecha"];
 
 export function UsageTable() {
   return (

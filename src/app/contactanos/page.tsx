@@ -24,7 +24,7 @@ function InfoBox({ icon, title, text }: { icon: ReactNode; title: string; text: 
 export default function ContactanosPage() {
   return (
     <>
-      <PageHero title="Contáctanos" image="2024/06/20240606-171916-scaled.jpg" position="0px -271px" />
+      <PageHero title="Contáctanos" image="2024/06/20240606-171916-scaled.jpg" position="50% 38%" />
 
       <section className="px-5 py-8 lg:px-8 lg:py-12">
         <div className="e-container grid items-start gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">

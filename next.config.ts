@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
   redirects() {
     return [{ source: "/alimentos-servicios", destination: "/productos", permanent: true }];
   },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    qualities: [50, 75],
+    localPatterns: [{ pathname: "/media/**", search: "" }],
+    minimumCacheTTL: 2678400,
+  },
+  // Imágenes y PDFs de public/media: nombres fechados que no cambian.
+  headers() {
+    return [
+      {
+        source: "/media/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, stale-while-revalidate=86400" }],
+      },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {

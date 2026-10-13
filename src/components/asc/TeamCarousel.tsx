@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { media } from "@/lib/media";
 
@@ -49,8 +50,7 @@ export function TeamCarousel({ images }: { images: { src: string; alt: string }[
               }}
               className="relative block aspect-[4/3] w-full shrink-0 cursor-pointer"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={media(im.src)} alt={im.alt} loading="lazy" draggable={false} className="absolute inset-0 size-full !rounded-none object-cover" />
+              <Image src={media(im.src)} alt={im.alt} fill sizes="(min-width: 1025px) 560px, 100vw" draggable={false} className="!rounded-none object-cover" />
             </button>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import {
   JetAccordion,
@@ -343,7 +344,7 @@ export default function AscPage() {
         title="Nuestro Compromiso con La Certificación ASC."
         image="2024/06/HAID-18-scaled.jpg"
         overlay={0.75}
-        position="0px -460px"
+        position="50% 65%"
         className="[&_h1]:max-w-[22ch] [&_h1]:text-[clamp(1.9rem,1rem+3vw,3.6rem)]"
       />
 
@@ -369,13 +370,13 @@ export default function AscPage() {
           </Reveal>
           <Reveal animation="fadeInRight">
             <a href={media("2026/10/certificado-asc.pdf")} target="_blank" rel="noopener" className="mx-auto block w-full max-w-[400px]" aria-label="Abrir certificado ASC (PDF)">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={media("2026/10/certificado-asc.webp")}
                 alt="Certificado ASC Feed Standard de HAID (Ecuador) Feed Cia Ltda."
                 width={1075}
                 height={1521}
                 className="block h-auto w-full !rounded-2xl shadow-[0_30px_64px_-34px_rgba(6,34,63,0.6)] ring-1 ring-navy/10"
+                sizes="(min-width: 1025px) 480px, 100vw"
               />
             </a>
           </Reveal>
@@ -412,14 +413,13 @@ export default function AscPage() {
         <div className="e-container">
           <Reveal animation="fadeIn">
             <div className="grid overflow-hidden rounded-[22px] bg-white shadow-[0_28px_60px_-38px_rgba(6,34,63,0.55)] ring-1 ring-navy/10 lg:grid-cols-[0.7fr_1.3fr]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={media("2026/10/transparencia.jpg")}
                 alt=""
                 width={1300}
                 height={866}
-                loading="lazy"
                 className="block h-[180px] w-full !rounded-none object-cover object-[30%_50%] lg:h-full lg:min-h-[240px]"
+                sizes="(min-width: 1025px) 560px, 100vw"
               />
               <div className="e-stack flex flex-col justify-center p-5 md:p-7 lg:p-9">
                 <h2 className="text-[clamp(1.4rem,1.05rem+1.3vw,2.1rem)]">Transparencia que impulsa nuestro futuro.</h2>
@@ -475,14 +475,13 @@ export default function AscPage() {
                 </p>
                 {/* La imagen ocupa el alto restante, hasta igualar la altura de la lista de informes. */}
                 <div className="relative min-h-[240px] flex-1 overflow-hidden rounded-[20px] shadow-[0_26px_56px_-34px_rgba(0,0,0,0.8)] ring-1 ring-white/15">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={media("2026/10/transparencia.jpg")}
                     alt="Manos sosteniendo una plántula"
                     width={1300}
                     height={866}
-                    loading="lazy"
                     className="absolute inset-0 size-full !rounded-none object-cover object-[25%_70%]"
+                    sizes="(min-width: 1025px) 560px, 100vw"
                   />
                 </div>
               </div>

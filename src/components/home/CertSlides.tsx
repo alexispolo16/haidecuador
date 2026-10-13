@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { media } from "@/lib/media";
+import { optimized } from "@/lib/media";
 import { ChevronLeft, ChevronRight } from "./chevrons";
 
 /**
@@ -35,7 +35,7 @@ export function CertSlides({ images }: { images: string[] }) {
           role="img"
           aria-hidden={i !== active}
           className="absolute inset-0 bg-white bg-contain bg-center bg-no-repeat transition-opacity duration-500"
-          style={{ backgroundImage: `url("${media(src)}")`, opacity: i === active ? 1 : 0 }}
+          style={{ backgroundImage: `url("${optimized(src, 1200)}")`, opacity: i === active ? 1 : 0 }}
         />
       ))}
       <div

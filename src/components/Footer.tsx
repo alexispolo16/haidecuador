@@ -1,10 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { auditNotice, company, legalDocs } from "@/content/site";
 import { media } from "@/lib/media";
 import { Shrimp } from "./Shrimp";
 import { FaFasEnvelope, FaFasMapMarkerAlt, FaFasPhone } from "./fa";
 
-const colTitle = "mb-3 font-display text-[0.85rem] font-semibold text-leaf";
+// h2 (orden de encabezados correcto tras el contenido) con el aspecto de los antiguos h4.
+const colTitle = "mb-3 font-display text-[0.85rem] leading-[1.2] font-semibold tracking-[-0.025em] text-leaf";
 const link = "inline-block py-0.5 text-[0.9rem] text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline";
 
 /** Pie de página: el fondo del estanque, con el anillo de la marca detrás del logotipo. */
@@ -16,13 +18,12 @@ export function Footer() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-[auto_0.8fr_1.3fr_1.5fr_1.1fr] lg:gap-10">
           {/* Logo */}
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={media("2024/05/logo-haid.png")} alt="" width={800} height={632} loading="lazy" className="h-auto w-[72px]" />
+            <Image src={media("2024/05/logo-haid.png")} alt="" width={800} height={632} className="h-auto w-[72px]" sizes="72px" />
           </div>
 
           {/* Menú */}
           <div>
-            <h4 className={colTitle}>Menú</h4>
+            <h2 className={colTitle}>Menú</h2>
             <ul>
               {[
                 ["/estos-es-haid", "Esto es Haid"],
@@ -40,7 +41,7 @@ export function Footer() {
 
           {/* Contáctanos */}
           <div>
-            <h4 className={colTitle}>Contáctanos</h4>
+            <h2 className={colTitle}>Contáctanos</h2>
             <ul className="space-y-2">
               <li className="flex items-start gap-3">
                 <FaFasMapMarkerAlt className="mt-1 h-[18px] w-[14px] shrink-0 text-leaf" />
@@ -61,7 +62,7 @@ export function Footer() {
 
           {/* Destacado */}
           <div>
-            <h4 className={colTitle}>Destacado</h4>
+            <h2 className={colTitle}>Destacado</h2>
             <div className="rounded-xl border border-white/15 bg-white/[0.05] p-3.5 text-[0.82rem] leading-snug text-white/90">
               <p className="!mb-1.5 font-display font-semibold text-white">{auditNotice.title}</p>
               <p className="!mb-0.5">Contacto: {auditNotice.contact}</p>
@@ -72,7 +73,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className={colTitle}>Links</h4>
+            <h2 className={colTitle}>Links</h2>
             <ul>
               {legalDocs.map((d) => (
                 <li key={d.file}>

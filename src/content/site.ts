@@ -5,6 +5,8 @@
  * (incluida su ortografía); no hay textos de relleno.
  */
 
+export const SITE_URL = "https://www.haid.com.ec";
+
 export const company = {
   legalName: "HAID (ECUADOR) FEED CIA, LTDA.",
   phone: "+59343915100",
@@ -50,15 +52,23 @@ export type Product = {
   /** "Conservación" (un elemento por párrafo). */
   storage: string[];
   datasheet: string;
-  /** En móvil el original centra título, lista y textos (todas salvo Starter). */
-  mobileCenter: boolean;
-  /** Ancho fijo en móvil del texto "Nuestro producto" (px), si el original lo define. */
-  mobileTextWidth?: number;
+  /** Línea de producto (pestañas de /productos). */
+  line: string;
+  /** Descripción del catálogo de /productos (un elemento por párrafo). */
+  summary: string[];
+  /** Uso recomendado del catálogo de /productos. */
+  note: string;
+  /** Color del alimento en la tabla de sugerencia de uso. */
+  usage: "pro" | "starter" | "speed" | "fitness" | "plus" | "happiness";
 };
 
 const SIZES_PELLET = ["#3 de 1.2 mm", "#4 de 1.6 mm", "#5 de 2.0 mm"];
 const DESC_EXT = "Alimento balanceado para camarón Litopenaeus vannamei, elaborado por proceso de extruido.";
 const STORAGE_EXT = ["Almacenar en lugar seco, ventilado y cubierto de los rayos solares."];
+// Textos del catálogo de https://www.haid.com.ec/productos/ (pestañas).
+const NOTE_LOW = "Recomendado para producciones que tienen densidades de siembra menores a 30 camarones/m² en la post transferencia.";
+const NOTE_SPEED = "Recomendado para producciones que tienen densidades de siembra mayor a 30 camarones / m² en post transferencia.";
+const LINE_PT = "Post-transferencia · Engorde";
 const STORAGE_PELLET = ["Almacenar en lugares cubiertos, secos y bien ventilados.", "No exponer a los rayos solares."];
 
 export const products: Product[] = [
@@ -71,8 +81,10 @@ export const products: Product[] = [
     description: "Alimento balanceado para camarón Litopenaus vannamei elaborado por proceso de extruido",
     storage: ["Almacenar en lugar seco, ventilado y cubierto de los rayos solares.\u00a0"],
     datasheet: "2024/07/Ficha-tecnica-Starter-pro-45_-Ext.pdf",
-    mobileCenter: true,
-    mobileTextWidth: 358.097,
+    line: "Iniciadores",
+    summary: ["Alimento micro extruido para alimentar a post-larvas de camarón desde PL10 a 1 gramo de peso."],
+    note: "Uso sugerido raceways y precrías de alta densidad.",
+    usage: "pro",
   },
   {
     slug: "starter",
@@ -83,7 +95,10 @@ export const products: Product[] = [
     description: DESC_EXT,
     storage: STORAGE_EXT,
     datasheet: "2024/07/Ficha-tecnica-Starter-42_-0.8-Ext.pdf",
-    mobileCenter: false,
+    line: "Iniciadores",
+    summary: ["Alimento extruido y quebrantado para alimentar a post-larvas de camarón desde PL10 a 1 gramo de peso."],
+    note: "Uso sugerido siembras directas, precrías y juveniles.",
+    usage: "starter",
   },
   {
     slug: "speed",
@@ -94,8 +109,13 @@ export const products: Product[] = [
     description: DESC_EXT,
     storage: STORAGE_EXT,
     datasheet: "2024/07/ficha-tecnica-Speed-pellet.pdf",
-    mobileCenter: true,
-    mobileTextWidth: 384.097,
+    line: LINE_PT,
+    summary: [
+      "Alimento extruido y peletizado para alimentar a juveniles post transferencia con 42% – 37% de proteína animal marina de alta calidad.",
+      "Máximo crecimiento, menor FCA, menos días, mayor rentabilidad.",
+    ],
+    note: NOTE_SPEED,
+    usage: "speed",
   },
   {
     slug: "happiness-plus",
@@ -106,8 +126,12 @@ export const products: Product[] = [
     description: DESC_EXT,
     storage: STORAGE_EXT,
     datasheet: "2024/07/Ficha-Tecnica-happiness-plus-35-pellet.pdf",
-    mobileCenter: true,
-    mobileTextWidth: 308.097,
+    line: LINE_PT,
+    summary: [
+      "Alimento extruido y peletizado para alimentar a juveniles post transferencia con 35% de proteína, especialmente diseñado para cultivos que requieren mayor contenido de minerales.",
+    ],
+    note: NOTE_LOW,
+    usage: "plus",
   },
   {
     slug: "happiness",
@@ -118,8 +142,12 @@ export const products: Product[] = [
     description: "Alimento balanceado pelletizado para camarones juveniles y de engorde que proporciona los nutrientes esenciales para el camarón",
     storage: STORAGE_PELLET,
     datasheet: "2024/07/Ficha-tecnica-Shrimpy-happiness-35-pellet.pdf",
-    mobileCenter: true,
-    mobileTextWidth: 338.097,
+    line: LINE_PT,
+    summary: [
+      "Alimento extruido y peletizado para alimentar a juveniles post transferencia con 35% de proteína, diseñado para cultivos con menores retos de producción. Dieta costo – eficiente para cultivos tecnificados.",
+    ],
+    note: NOTE_LOW,
+    usage: "happiness",
   },
   {
     slug: "fitness",
@@ -131,8 +159,12 @@ export const products: Product[] = [
       "Alimento balanceado pelletizado para camarones juveniles y de engorde que proporciona los nutrientes esenciales y previene enfermedades en el intestino del camarón",
     storage: STORAGE_PELLET,
     datasheet: "2024/07/Ficha-tecnica-Shrimpy-fitness-35-pellet.pdf",
-    mobileCenter: true,
-    mobileTextWidth: 338.097,
+    line: "Salud",
+    summary: [
+      "Alimento extruido y peletizado para alimentar a juveniles post transferencia con 35% de proteína, diseñado con premezclas de alta gama para reducir el estrés de los camarones post – transferencia. Contiene aceites esenciales, inhibe el crecimiento de bacterias patógenas como Vibrio parahaemolyticus y potencia el desarrollo del hepatopáncreas.",
+    ],
+    note: NOTE_LOW,
+    usage: "fitness",
   },
 ];
 

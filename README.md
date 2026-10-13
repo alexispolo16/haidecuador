@@ -34,6 +34,13 @@ Están alojados en `public/media` (76 archivos, ~30 MB) y se resuelven con `src/
 npm run import:media
 ```
 
+## Rendimiento y SEO
+
+- `/sitemap.xml` (`src/app/sitemap.ts`) y `/robots.txt` (`src/app/robots.ts`) se generan a partir del menú y de las fichas de `src/content/site.ts`; el dominio está en `SITE_URL`.
+- Las imágenes usan `next/image` (AVIF/WebP redimensionado). Para fondos CSS usa `optimized()` de `src/lib/media.ts`. La imagen principal de cada portada lleva `fetchPriority="high"`.
+- Fuentes: `src/app/fonts/` tiene Sora y Hanken Grotesk (OFL) recortadas a caracteres latinos y a los pesos usados (500–700 y 400–700). Si usas un peso fuera de ese rango, vuelve a generarlas.
+- Los íconos SVG grandes viven en `public/media/icons/` (no en línea) para que el HTML pese poco.
+
 ## Formularios
 
 `/contactanos` y `/responsabilidad-ambiental` envían a la server action `src/app/actions.ts`, que valida y registra los datos. Falta conectar el envío de correo (Resend, SMTP, etc.) en el `TODO` de ese archivo.

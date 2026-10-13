@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { UsageTable } from "@/components/productos/UsageTable";
 import { Shrimp } from "@/components/Shrimp";
@@ -100,14 +101,13 @@ export default function ProductosPage() {
             </div>
           </div>
           <div className="flex flex-1 flex-col justify-center p-2.5 text-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={media("2024/06/tabla-formatos-18.png")}
               alt=""
               width={1887}
               height={1391}
-              loading="lazy"
               className="mx-auto inline-block h-auto w-[65%] max-md:w-[95%]"
+              sizes="(min-width: 768px) 520px, 95vw"
             />
           </div>
         </div>
