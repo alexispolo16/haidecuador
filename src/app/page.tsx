@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CertSlides } from "@/components/home/CertSlides";
 import { HeroSlideshow } from "@/components/home/HeroSlideshow";
 import { Reveal } from "@/components/Reveal";
 import { Shrimp } from "@/components/Shrimp";
@@ -39,21 +38,6 @@ const products = [
   { image: "2024/06/haid-productos-01.png", title: "Starter Pro", pos: "54.3% 48.1%" },
   { image: "2024/06/haid-productos-03.png", title: "Happiness", pos: "56.8% 48.8%" },
   { image: "2024/06/haid-productos-02.png", title: "Starter", pos: "58.5% 47.5%" },
-];
-
-const certSlides = [
-  "2024/06/Screenshot-2024-06-03-at-18.39.46.png",
-  "2024/06/Screenshot-2024-06-03-at-18.38.58.png",
-  "2024/06/Screenshot-2024-06-03-at-18.39.28.png",
-  "2024/06/Screenshot-2024-06-03-at-18.38.37.png",
-];
-
-const certifications = [
-  "Best Aquaculture Practives (BAP V 3.1 FEED MILLS )",
-  "National Control Plan of Aquaculture and Fisheries",
-  "Buenas Prácticas de Almacenamiento (BPA)",
-  "Análisis de Peligros y Puntos Críticos de Control (HACCP)",
-  "Global Good Agricultural Practices (GLobal GAP V 2.2 COMPOUND FEED MANUFACTURING)",
 ];
 
 const btn = "e-btn !bg-green-btn hover:!bg-navy";
@@ -313,34 +297,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Certificaciones */}
-      <section className="px-5 py-12 lg:px-8 lg:py-16">
-        <div className="e-container grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
-          <Reveal animation="fadeInLeft">
-            <div className="overflow-hidden rounded-[28px] bg-white shadow-[0_30px_70px_-34px_rgba(6,34,63,0.5)] ring-1 ring-navy/10">
-              <CertSlides images={certSlides} />
-            </div>
-          </Reveal>
-          <Reveal animation="fadeInRight">
-            <div className="e-stack flex flex-col">
-              <h2 className="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)]">Haid cuenta con las siguientes certificaciones</h2>
-              <p className="text-muted">
-                Conoce nuestras certificaciones. Haid se certifica para dar un mejor servicio, garantizando altos estándares de calidad, gestión
-                ambiental y seguridad laboral en todas sus operaciones.
-              </p>
-              <ul className="list-none p-0">
-                {certifications.map((c, i) => (
-                  <li key={c} className="flex items-center gap-4 border-b border-navy/15 py-3 first:border-t">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={media(`icons/certificacion-${i + 1}.svg`)} alt="" width={44} height={44} loading="lazy" className="block size-11 shrink-0 !rounded-none object-contain" />
-                    <span className="font-display text-[1rem] leading-snug font-medium text-ink">{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
