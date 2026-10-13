@@ -132,8 +132,8 @@ export default function Home() {
             <div className="e-stack flex flex-col">
               <h6>Nosotros</h6>
               <h2>Acerca de Haid Ecuador</h2>
-              <div>
-                <p className="text-[1.12rem] leading-[1.6] text-ink">
+              <div className="text-justify">
+                <p>
                   Haid Ecuador Feed Cia. Ltda. forma parte del Grupo Haid, multinacional líder en nutrición y tecnología acuícola, fundada en
                   1998 en Guangdong, China, y reconocida globalmente por su innovación en alimentos balanceados, genética animal y servicios
                   técnicos integrados.

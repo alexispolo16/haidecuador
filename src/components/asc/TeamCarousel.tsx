@@ -19,7 +19,7 @@ export function TeamCarousel({ images }: { images: { src: string; alt: string }[
   return (
     <div className="relative select-none">
       <div
-        className="relative overflow-hidden rounded-[18px] shadow-[0_26px_56px_-32px_rgba(6,34,63,0.6)] ring-1 ring-navy/10"
+        className="relative overflow-hidden rounded-[28px] rounded-br-[110px] shadow-[0_30px_70px_-34px_rgba(6,34,63,0.55)] ring-1 ring-navy/10 max-md:rounded-[20px] max-md:rounded-br-[70px]"
         onPointerDown={(e) => {
           startX.current = e.clientX;
           moved.current = false;
@@ -48,7 +48,7 @@ export function TeamCarousel({ images }: { images: { src: string; alt: string }[
               onClick={() => {
                 if (!moved.current) go(1);
               }}
-              className="relative block aspect-[4/3] w-full shrink-0 cursor-pointer"
+              className="relative block aspect-[4/3] w-full shrink-0 cursor-pointer lg:aspect-[5/4]"
             >
               <Image src={media(im.src)} alt={im.alt} fill sizes="(min-width: 1025px) 560px, 100vw" draggable={false} className="!rounded-none object-cover" />
             </button>
@@ -59,7 +59,7 @@ export function TeamCarousel({ images }: { images: { src: string; alt: string }[
           type="button"
           aria-label="Foto anterior"
           onClick={() => go(-1)}
-          className="absolute top-1/2 left-3 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-ink/55 text-white backdrop-blur transition hover:bg-green-btn"
+          className="absolute bottom-4 left-4 grid size-10 place-items-center rounded-full bg-white/90 text-navy shadow-[0_8px_20px_-8px_rgba(6,34,63,0.6)] backdrop-blur transition hover:bg-green-btn hover:text-white"
         >
           <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M12.5 4l-6 6 6 6" />
@@ -69,7 +69,7 @@ export function TeamCarousel({ images }: { images: { src: string; alt: string }[
           type="button"
           aria-label="Foto siguiente"
           onClick={() => go(1)}
-          className="absolute top-1/2 right-3 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-ink/55 text-white backdrop-blur transition hover:bg-green-btn"
+          className="absolute bottom-4 left-16 grid size-10 place-items-center rounded-full bg-white/90 text-navy shadow-[0_8px_20px_-8px_rgba(6,34,63,0.6)] backdrop-blur transition hover:bg-green-btn hover:text-white"
         >
           <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M7.5 4l6 6-6 6" />

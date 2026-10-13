@@ -98,9 +98,16 @@ export function CookieConsent() {
     setReopened(true);
   };
 
+  const openDetails = () => {
+    setTab("details");
+    setReopened(true);
+  };
+
   return (
     <>
-      {open && <Dialog tab={tab} setTab={setTab} current={current} toggle={toggle} submit={submit} stored={stored} />}
+      {/* Primera visita: barra inferior. «Detalles» o el botón flotante abren el panel completo. */}
+      {open && !reopened && <Bar onDeny={() => submit(NONE)} onDetails={openDetails} onAllowAll={() => submit(ALL)} />}
+      {open && reopened && <Dialog tab={tab} setTab={setTab} current={current} toggle={toggle} submit={submit} stored={stored} />}
       {decided && !open && (
         <button
           type="button"
@@ -118,6 +125,51 @@ export function CookieConsent() {
         </button>
       )}
     </>
+  );
+}
+
+/** Barra fija en la parte inferior, a todo el ancho. */
+function Bar({ onDeny, onDetails, onAllowAll }: { onDeny: () => void; onDetails: () => void; onAllowAll: () => void }) {
+  return (
+    <section
+      role="region"
+      aria-labelledby="cookie-bar-title"
+      className="fixed inset-x-0 bottom-0 z-[60] border-t border-[#d6d6d6] bg-white font-[Helvetica,Arial,sans-serif] text-[#141414] shadow-[0_-12px_40px_rgba(0,0,0,0.15)]"
+    >
+      <div className="mx-auto flex max-w-[1230px] flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:gap-8 md:px-6 md:py-4">
+        <div className="min-w-0 flex-1">
+          <h2 id="cookie-bar-title" className="mb-1 font-[inherit] text-[14px] font-bold tracking-normal text-[#141414]">
+            Esta página web usa cookies
+          </h2>
+          <p className="!mb-0 max-h-[30vh] !max-w-none overflow-y-auto text-[13px] leading-[1.5] text-[#141414]">
+            Las cookies de este sitio web se usan para personalizar el contenido y los anuncios, ofrecer funciones de redes sociales y analizar el tráfico.
+            Además, compartimos información sobre el uso que haga del sitio web con nuestros partners de redes sociales, publicidad y análisis web, quienes
+            pueden combinarla con otra información que les haya proporcionado o que hayan recopilado a partir del uso que haya hecho de sus servicios.
+          </p>
+        </div>
+        <div className="grid shrink-0 grid-cols-3 gap-2 md:flex">
+          <BarButton onClick={onDeny}>Denegar</BarButton>
+          <BarButton onClick={onDetails}>Detalles</BarButton>
+          <BarButton onClick={onAllowAll} primary>
+            Permitir todas
+          </BarButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BarButton({ children, onClick, primary = false }: { children: React.ReactNode; onClick: () => void; primary?: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`min-h-11 rounded border-2 border-[#1032cf] px-2 py-1.5 text-[12px] leading-tight font-bold tracking-[0.4px] uppercase transition md:px-5 md:text-[13px] ${
+        primary ? "bg-[#1032cf] text-white hover:border-[#2a4ae0] hover:bg-[#2a4ae0]" : "bg-white text-[#1032cf] hover:bg-[#eef1fd]"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 

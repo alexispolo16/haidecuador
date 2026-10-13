@@ -63,7 +63,7 @@ export function Footer() {
           {/* Destacado */}
           <div>
             <h2 className={colTitle}>Destacado</h2>
-            <div className="rounded-xl border border-white/15 bg-white/[0.05] p-3.5 text-[0.82rem] leading-snug text-white/90">
+            <div className="rounded-xl border border-white/15 bg-white/[0.05] p-3.5 text-center text-[0.82rem] leading-snug text-white/90">
               <p className="!mb-1.5 font-display font-semibold text-white">{auditNotice.title}</p>
               <p className="!mb-0.5">Contacto: {auditNotice.contact}</p>
               <p className="!mb-0.5">Fecha de auditoría: {auditNotice.date}</p>

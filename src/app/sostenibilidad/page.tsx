@@ -3,39 +3,40 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SustAccordion } from "@/components/sostenibilidad/Accordion";
+import { SourcingPolicy } from "@/components/sostenibilidad/SourcingPolicy";
 import { Shrimp } from "@/components/Shrimp";
 import { media } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Sostenibilidad" };
 
-// Textos copiados literalmente de https://www.haid.com.ec/sostenibilidad/
+// Textos copiados literalmente de https://www.haid.com.ec/sostenibilidad/; el compromiso público,
+// del PDF «Compromiso Público para la Transición a Cadenas de Suministro Libres de Deforestación y Conversión».
 
 
 const commitments = [
   {
-    title:
-      "Procedimientos para cadenas suministro libre de Deforestación y Conversión",
-    text: "Establecer procedimientos para asegurar el abastecimiento de ingredientes vegetales libres de deforestación y conversión en todas nuestras operaciones y en nuestra cadena de suministro.",
+    title: "Procedimientos para cadenas suministro libre de Deforestación y Conversión.",
+    text: "Nos comprometemos a revisar periódicamente nuestros procedimientos y realizar las actualizaciones correspondientes para asegurar el abastecimiento de ingredientes vegetales libre de deforestación y conversión en todas nuestras operaciones y en nuestra cadena de suministro.",
   },
   {
-    title: "Transparencia y Trazabilidad",
-    text: "Implementar sistemas para asegurar la trazabilidad de todos nuestros productos desde su origen hasta el consumidor final. Utilizar certificaciones para garantizar la transparencia y la integridad de nuestra cadena de suministro.",
+    title: "Transparencia y Trazabilidad.",
+    text: "Ejecutar con rigor nuestros procesos operativos y de control, manteniendo un trabajo articulado y una comunicación continua con los proveedores para asegurar la recopilación oportuna de toda la evidencia documental de respaldo, garantizando la trazabilidad completa de los productos desde su origen hasta el consumidor final, respaldada por esquemas de certificación que avalan la transparencia e integridad de toda nuestra cadena de suministro.",
   },
   {
-    title: "Colaboración con Proveedores",
-    text: "Trabajar estrechamente con nuestros proveedores para garantizar que cumplan con nuestros estándares de sostenibilidad. Incluir capacitaciones y auditorías regulares.",
+    title: "Colaboración con Proveedores.",
+    text: "Trabajaremos estrechamente con nuestros proveedores para garantizar que cumplan con nuestros estándares de sostenibilidad. Esto puede incluir capacitaciones y auditorías regulares.",
   },
   {
-    title: "Transparencia en los Informes",
-    text: "Ser accesibles y auditables por partes interesadas y el público en general, reflejar nuestro compromiso con la rendición de cuentas y la transparencia.",
+    title: "Transparencia en los Informes.",
+    text: "Nuestros informes serán accesibles y auditables por partes interesadas y el público en general, reflejando nuestro compromiso con la rendición de cuentas y la transparencia.",
   },
   {
-    title: "Educación y Concienciación",
-    text: "Proveer información a los consumidores sobre la importancia de elegir productos libres de pesca ilegal, deforestación y conversión. Fomentar una mayor demanda de productos sostenibles a través de la concienciación pública.",
+    title: "Educación y Concienciación.",
+    text: "Proveer información a los consumidores sobre la importancia de elegir productos libres de deforestación y conversión. Fomentaremos una mayor demanda de productos sostenibles a través de la concientización pública.",
   },
   {
-    title: "Plan de acción público",
-    text: "Suspender a cualquier proveedor que no cumpla con los estándares éticos y sostenibles. Levantar la suspensión solo cuando el proveedor establezca un plan de acción, en un plazo de 1 año a partir de la auditoría inicial y se verifique el cumplimiento continuo.",
+    title: "Plan de acción público:",
+    text: "Se suspenderá a cualquier proveedor que no cumpla con los estándares éticos y sostenibles. La suspensión se levantará solo cuando el proveedor establece un plan de acción, en un plazo de 1 año a partir de la auditoria inicial y se verifique el cumplimiento continuo.",
   },
 ];
 
@@ -111,6 +112,10 @@ export default function SostenibilidadPage() {
             </div>
           </Reveal>
         </div>
+        {/* Los siete puntos de la política (antes en /asc) */}
+        <Reveal animation="fadeInUp" className="e-container mt-8 lg:mt-10">
+          <SourcingPolicy />
+        </Reveal>
       </section>
 
       {/* 2 · Gestión de la energía: banda de agua somera, políticas como lista */}
@@ -146,8 +151,8 @@ export default function SostenibilidadPage() {
                 <h2 className="text-[clamp(1.6rem,1.1rem+1.7vw,2.5rem)] text-white">Compromiso público para la transición a cadenas de suministro libres de deforestación y conversión.</h2>
                 <p className="!mb-0 border-l-[3px] border-leaf pl-4 text-white/85">
                   Nosotros, Haid (Ecuador) Feed Cia Ltda., reconociendo la urgente necesidad de proteger nuestros bosques y otros ecosistemas naturales,
-                  declaramos públicamente nuestro compromiso de transitar hacia cadenas de suministro libres de pesca ilegal, deforestación y conversión.
-                  Nos comprometemos a:
+                  declaramos públicamente nuestro compromiso de transitar hacia cadenas de suministro libres de deforestación y conversión. A continuación,
+                  se describen los elementos clave de este compromiso:
                 </p>
               </div>
             </Reveal>
@@ -178,9 +183,8 @@ export default function SostenibilidadPage() {
               </svg>
             </span>
             <p className="m-0 max-w-none text-[1rem] leading-relaxed text-white/90 md:text-[1.05rem]">
-              Con este compromiso, Haid (Ecuador) Feed Cia Ltda., se compromete a asegurar el abastecimiento de ingredientes vegetales libres de
-              deforestación/conversión desde el <strong className="font-semibold text-leaf">1 de mayo 2024</strong> terminando su implementación&nbsp;en&nbsp;
-              <strong className="font-semibold text-leaf">mayo&nbsp;2025</strong>.
+              Haid (Ecuador) Feed Cia Ltda., se compromete a asegurar el abastecimiento de ingredientes vegetales libres de deforestación/conversión
+              teniendo cómo fecha máxima <strong className="font-semibold text-leaf">diciembre&nbsp;2028</strong>.
             </p>
           </div>
         </div>
